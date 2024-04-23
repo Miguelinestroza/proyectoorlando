@@ -423,4 +423,66 @@ Public Class frmNuevoTramite
     Private Sub MaskedTextBox2_MaskInputRejected(sender As Object, e As MaskInputRejectedEventArgs) Handles MaskedTextBox2.MaskInputRejected
 
     End Sub
+
+    Private Sub TextBox4_TextChanged(sender As Object, e As EventArgs) Handles TextBox4.TextChanged
+        If TextBox4.Text.Length = 3 Then
+            conect()
+
+            If conexion.State = ConnectionState.Closed Then
+                conexion.Open()
+            End If
+            Try
+                Dim terminoBusqueda As String = TextBox4.Text.Trim()
+                Dim consulta As String = "SELECT * FROM Profeciones WHERE Codigo = @Codigo"
+                Using comando As New SqlCommand(consulta, conexion)
+                    comando.Parameters.AddWithValue("@Codigo", terminoBusqueda)
+                    Dim adaptador As New SqlDataAdapter(comando)
+                    Dim conjuntoDatos As New DataSet()
+                    adaptador.Fill(conjuntoDatos, "Codigo")
+                    If conjuntoDatos.Tables("Codigo").Rows.Count > 0 Then
+                        Dim fila As DataRow = conjuntoDatos.Tables("Codigo").Rows(0)
+                        TextBox5.Text = fila("Nombre").ToString()
+                    Else
+                        MessageBox.Show("No se encontró el Departamento especificado.", "No Existe", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    End If
+                End Using
+            Catch ex As Exception
+                MessageBox.Show("Error al buscar el Departamento: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Finally
+                conexion.Close()
+            End Try
+        Else
+        End If
+    End Sub
+
+    Private Sub TextBox7_TextChanged(sender As Object, e As EventArgs) Handles TextBox7.TextChanged
+        If TextBox7.Text.Length = 3 Then
+            conect()
+
+            If conexion.State = ConnectionState.Closed Then
+                conexion.Open()
+            End If
+            Try
+                Dim terminoBusqueda As String = TextBox7.Text.Trim()
+                Dim consulta As String = "SELECT * FROM Ocupaciones WHERE Codigo = @Codigo"
+                Using comando As New SqlCommand(consulta, conexion)
+                    comando.Parameters.AddWithValue("@Codigo", terminoBusqueda)
+                    Dim adaptador As New SqlDataAdapter(comando)
+                    Dim conjuntoDatos As New DataSet()
+                    adaptador.Fill(conjuntoDatos, "Codigo")
+                    If conjuntoDatos.Tables("Codigo").Rows.Count > 0 Then
+                        Dim fila As DataRow = conjuntoDatos.Tables("Codigo").Rows(0)
+                        TextBox6.Text = fila("Nombre").ToString()
+                    Else
+                        MessageBox.Show("No se encontró el Departamento especificado.", "No Existe", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    End If
+                End Using
+            Catch ex As Exception
+                MessageBox.Show("Error al buscar el Departamento: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Finally
+                conexion.Close()
+            End Try
+        Else
+        End If
+    End Sub
 End Class

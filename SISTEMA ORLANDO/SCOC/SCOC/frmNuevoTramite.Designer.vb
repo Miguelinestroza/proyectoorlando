@@ -23,10 +23,10 @@ Partial Class frmNuevoTramite
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmNuevoTramite))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -35,6 +35,8 @@ Partial Class frmNuevoTramite
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.TextBox21 = New System.Windows.Forms.TextBox()
+        Me.TextBox3 = New System.Windows.Forms.TextBox()
         Me.Button12 = New System.Windows.Forms.Button()
         Me.Panel7 = New System.Windows.Forms.Panel()
         Me.Button5 = New System.Windows.Forms.Button()
@@ -197,7 +199,6 @@ Partial Class frmNuevoTramite
         '
         Me.Button2.BackgroundImage = CType(resources.GetObject("Button2.BackgroundImage"), System.Drawing.Image)
         Me.Button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.Button2.Enabled = False
         Me.Button2.Location = New System.Drawing.Point(178, 71)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(25, 25)
@@ -206,6 +207,8 @@ Partial Class frmNuevoTramite
         '
         'TabPage2
         '
+        Me.TabPage2.Controls.Add(Me.TextBox21)
+        Me.TabPage2.Controls.Add(Me.TextBox3)
         Me.TabPage2.Controls.Add(Me.Button12)
         Me.TabPage2.Controls.Add(Me.Panel7)
         Me.TabPage2.Controls.Add(Me.MaskedTextBox3)
@@ -235,6 +238,28 @@ Partial Class frmNuevoTramite
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Plan de Pago"
         Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'TextBox21
+        '
+        Me.TextBox21.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TextBox21.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.TextBox21.Font = New System.Drawing.Font("Agency FB", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox21.Location = New System.Drawing.Point(639, 318)
+        Me.TextBox21.MaxLength = 4
+        Me.TextBox21.Name = "TextBox21"
+        Me.TextBox21.Size = New System.Drawing.Size(10, 21)
+        Me.TextBox21.TabIndex = 65
+        '
+        'TextBox3
+        '
+        Me.TextBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TextBox3.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.TextBox3.Font = New System.Drawing.Font("Agency FB", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox3.Location = New System.Drawing.Point(655, 318)
+        Me.TextBox3.MaxLength = 4
+        Me.TextBox3.Name = "TextBox3"
+        Me.TextBox3.Size = New System.Drawing.Size(10, 21)
+        Me.TextBox3.TabIndex = 64
         '
         'Button12
         '
@@ -305,10 +330,10 @@ Partial Class frmNuevoTramite
         '
         Me.TextBox26.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.TextBox26.Font = New System.Drawing.Font("Agency FB", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox26.Location = New System.Drawing.Point(413, 292)
+        Me.TextBox26.Location = New System.Drawing.Point(413, 287)
         Me.TextBox26.Name = "TextBox26"
         Me.TextBox26.ReadOnly = True
-        Me.TextBox26.Size = New System.Drawing.Size(64, 26)
+        Me.TextBox26.Size = New System.Drawing.Size(62, 26)
         Me.TextBox26.TabIndex = 60
         Me.TextBox26.Text = "0.00"
         Me.TextBox26.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -317,7 +342,7 @@ Partial Class frmNuevoTramite
         '
         Me.TextBox25.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.TextBox25.Font = New System.Drawing.Font("Agency FB", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox25.Location = New System.Drawing.Point(351, 292)
+        Me.TextBox25.Location = New System.Drawing.Point(351, 287)
         Me.TextBox25.Name = "TextBox25"
         Me.TextBox25.ReadOnly = True
         Me.TextBox25.Size = New System.Drawing.Size(62, 26)
@@ -329,10 +354,10 @@ Partial Class frmNuevoTramite
         '
         Me.TextBox23.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.TextBox23.Font = New System.Drawing.Font("Agency FB", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox23.Location = New System.Drawing.Point(287, 292)
+        Me.TextBox23.Location = New System.Drawing.Point(288, 287)
         Me.TextBox23.Name = "TextBox23"
         Me.TextBox23.ReadOnly = True
-        Me.TextBox23.Size = New System.Drawing.Size(64, 26)
+        Me.TextBox23.Size = New System.Drawing.Size(63, 26)
         Me.TextBox23.TabIndex = 57
         Me.TextBox23.Text = "0.00"
         Me.TextBox23.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -574,39 +599,39 @@ Partial Class frmNuevoTramite
         '
         Me.DataGridView1.AllowUserToAddRows = False
         Me.DataGridView1.AllowUserToDeleteRows = False
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Arial Narrow", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.White
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black
-        Me.DataGridView1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Arial Narrow", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.White
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black
+        Me.DataGridView1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle5
         Me.DataGridView1.BackgroundColor = System.Drawing.Color.White
         Me.DataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle6
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3, Me.Column5, Me.Column6, Me.Column7, Me.Column8})
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Arial Narrow", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.White
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("Arial Narrow", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle7.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.White
+        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle7
         Me.DataGridView1.GridColor = System.Drawing.Color.White
         Me.DataGridView1.Location = New System.Drawing.Point(186, 0)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
-        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
-        Me.DataGridView1.RowsDefaultCellStyle = DataGridViewCellStyle4
-        Me.DataGridView1.Size = New System.Drawing.Size(476, 292)
+        DataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black
+        Me.DataGridView1.RowsDefaultCellStyle = DataGridViewCellStyle8
+        Me.DataGridView1.Size = New System.Drawing.Size(476, 287)
         Me.DataGridView1.TabIndex = 0
         '
         'Column1
@@ -785,10 +810,11 @@ Partial Class frmNuevoTramite
         Me.TextBox7.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.TextBox7.Font = New System.Drawing.Font("Agency FB", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox7.Location = New System.Drawing.Point(400, 61)
-        Me.TextBox7.MaxLength = 4
+        Me.TextBox7.MaxLength = 3
         Me.TextBox7.Name = "TextBox7"
         Me.TextBox7.Size = New System.Drawing.Size(37, 26)
         Me.TextBox7.TabIndex = 9
+        Me.TextBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'TextBox5
         '
@@ -807,10 +833,11 @@ Partial Class frmNuevoTramite
         Me.TextBox4.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.TextBox4.Font = New System.Drawing.Font("Agency FB", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox4.Location = New System.Drawing.Point(98, 61)
-        Me.TextBox4.MaxLength = 4
+        Me.TextBox4.MaxLength = 3
         Me.TextBox4.Name = "TextBox4"
         Me.TextBox4.Size = New System.Drawing.Size(37, 26)
         Me.TextBox4.TabIndex = 8
+        Me.TextBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label8
         '
@@ -957,7 +984,7 @@ Partial Class frmNuevoTramite
         Me.TextBox11.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.TextBox11.Font = New System.Drawing.Font("Agency FB", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox11.Location = New System.Drawing.Point(350, 37)
-        Me.TextBox11.MaxLength = 4
+        Me.TextBox11.MaxLength = 2
         Me.TextBox11.Name = "TextBox11"
         Me.TextBox11.Size = New System.Drawing.Size(37, 26)
         Me.TextBox11.TabIndex = 11
@@ -993,7 +1020,7 @@ Partial Class frmNuevoTramite
         Me.TextBox9.Cursor = System.Windows.Forms.Cursors.IBeam
         Me.TextBox9.Font = New System.Drawing.Font("Agency FB", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox9.Location = New System.Drawing.Point(75, 37)
-        Me.TextBox9.MaxLength = 4
+        Me.TextBox9.MaxLength = 2
         Me.TextBox9.Name = "TextBox9"
         Me.TextBox9.Size = New System.Drawing.Size(37, 26)
         Me.TextBox9.TabIndex = 10
@@ -1244,4 +1271,6 @@ Partial Class frmNuevoTramite
     Friend WithEvents Column6 As DataGridViewTextBoxColumn
     Friend WithEvents Column7 As DataGridViewTextBoxColumn
     Friend WithEvents Column8 As DataGridViewTextBoxColumn
+    Friend WithEvents TextBox21 As TextBox
+    Friend WithEvents TextBox3 As TextBox
 End Class

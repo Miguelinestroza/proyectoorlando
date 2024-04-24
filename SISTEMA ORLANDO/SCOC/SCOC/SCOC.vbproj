@@ -115,6 +115,36 @@
     <Compile Include="frmEstadoDeCuenta.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmListaCiudades.Designer.vb">
+      <DependentUpon>frmListaCiudades.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmListaCiudades.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmListaDepartamento.Designer.vb">
+      <DependentUpon>frmListaDepartamento.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmListaDepartamento.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmListaOcupaciones.Designer.vb">
+      <DependentUpon>frmListaOcupaciones.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmListaOcupaciones.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmListaProfeciones.Designer.vb">
+      <DependentUpon>frmListaProfeciones.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmListaProfeciones.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMora.Designer.vb">
+      <DependentUpon>frmMora.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmMora.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmPostearPago.Designer.vb">
       <DependentUpon>frmPostearPago.vb</DependentUpon>
     </Compile>
@@ -162,6 +192,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmEstadoDeCuenta.resx">
       <DependentUpon>frmEstadoDeCuenta.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmListaCiudades.resx">
+      <DependentUpon>frmListaCiudades.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmListaDepartamento.resx">
+      <DependentUpon>frmListaDepartamento.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmListaOcupaciones.resx">
+      <DependentUpon>frmListaOcupaciones.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmListaProfeciones.resx">
+      <DependentUpon>frmListaProfeciones.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMora.resx">
+      <DependentUpon>frmMora.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPostearPago.resx">
       <DependentUpon>frmPostearPago.vb</DependentUpon>

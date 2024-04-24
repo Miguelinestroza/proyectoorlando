@@ -27,4 +27,9 @@ C:\Users\W11CESAR\Desktop\SISTEMA ORLANDO\SCOC\SCOC\bin\Debug\Sistema de Contabi
 C:\Users\W11CESAR\Desktop\SISTEMA ORLANDO\SCOC\SCOC\bin\Debug\Sistema de Contabilidad Orlando Castillo(SCOC).xml
 C:\Users\W11CESAR\Desktop\SISTEMA ORLANDO\SCOC\SCOC\obj\Debug\Sistema de Contabilidad Orlando Castillo(SCOC).exe
 C:\Users\W11CESAR\Desktop\SISTEMA ORLANDO\SCOC\SCOC\obj\Debug\Sistema de Contabilidad Orlando Castillo(SCOC).pdb
+C:\Users\W11CESAR\Desktop\SISTEMA ORLANDO\SCOC\SCOC\obj\Debug\SCOC.frmMora.resources
 C:\Users\W11CESAR\Desktop\SISTEMA ORLANDO\SCOC\SCOC\obj\Debug\SCOC.vbprojResolveAssemblyReference.cache
+C:\Users\W11CESAR\Desktop\SISTEMA ORLANDO\SCOC\SCOC\obj\Debug\SCOC.frmListaOcupaciones.resources
+C:\Users\W11CESAR\Desktop\SISTEMA ORLANDO\SCOC\SCOC\obj\Debug\SCOC.frmListaProfeciones.resources
+C:\Users\W11CESAR\Desktop\SISTEMA ORLANDO\SCOC\SCOC\obj\Debug\SCOC.frmListaDepartamento.resources
+C:\Users\W11CESAR\Desktop\SISTEMA ORLANDO\SCOC\SCOC\obj\Debug\SCOC.frmListaCiudades.resources

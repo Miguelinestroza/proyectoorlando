@@ -2,54 +2,34 @@
 Imports System.Globalization
 Imports System.Linq
 Public Class frmNuevoTramite
-    Public plaso As Char
     Public sexo As Char
     Private Sub frmNuevoTramite_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        conexion = New SqlConnection("Data Source=CESAR\SQLCREDI;Initial Catalog=SistemaOrlando;Persist Security Info=True;User ID=sa;Password=1625")
+        comando = New SqlCommand()
+        comando.Connection = conexion
+        Try
+            conexion.Open()
+        Catch ex As Exception
+            MessageBox.Show("Error al conectar a la base de datos: " & ex.Message, "Error de conexión", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Me.Close()
+        End Try
+
         DataGridView1.RowHeadersVisible = False
         DataGridView1.AllowUserToResizeRows = True
         DataGridView1.DefaultCellStyle.WrapMode = DataGridViewTriState.True
         MaskedTextBox4.Text = DateTime.Now.ToString("dd/MM/yyyy")
         MaskedTextBox2.Text = DateTime.Now.ToString("dd/MM/yyyy")
-        MaskedTextBox3.Text = DateTime.Now.ToString("dd/MM/yyyy")
-
-
-        If RadioButton3.Checked = True Then
-            plaso = "7"
-        ElseIf RadioButton4.Checked = True Then
-            plaso = "15"
-        ElseIf RadioButton5.Checked = True Then
-            plaso = "30"
-        End If
+        fechaPrimerPago()
 
         If RadioButton1.Checked = True Then
             sexo = "M"
         ElseIf RadioButton2.Checked = True Then
             sexo = "F"
         End If
-        If TextBox1.Text = "" Then
-            TextBox2.Enabled = False
-            MaskedTextBox1.Enabled = False
-            TextBox4.Enabled = False
-            TextBox5.Enabled = False
-            TextBox6.Enabled = False
-            TextBox7.Enabled = False
-            TextBox8.Enabled = False
-            TextBox9.Enabled = False
-            TextBox10.Enabled = False
-            TextBox11.Enabled = False
-            TextBox12.Enabled = False
-            TextBox13.Enabled = False
-            TextBox14.Enabled = False
-            TextBox15.Enabled = False
-            RadioButton1.Enabled = False
-            RadioButton2.Enabled = False
-            MaskedTextBox4.Enabled = False
-        End If
+        DeshabilitarCampos()
     End Sub
     Private Sub TextBox9_TextChanged(sender As Object, e As EventArgs) Handles TextBox9.TextChanged
         If TextBox9.Text.Length = 2 Then
-            conect()
-
             If conexion.State = ConnectionState.Closed Then
                 conexion.Open()
             End If
@@ -58,29 +38,24 @@ Public Class frmNuevoTramite
                 Dim consulta As String = "SELECT * FROM Departamentos WHERE Codigo = @Codigo"
                 Using comando As New SqlCommand(consulta, conexion)
                     comando.Parameters.AddWithValue("@Codigo", terminoBusqueda)
-                    Dim adaptador As New SqlDataAdapter(comando)
-                    Dim conjuntoDatos As New DataSet()
-                    adaptador.Fill(conjuntoDatos, "Codigo")
-                    If conjuntoDatos.Tables("Codigo").Rows.Count > 0 Then
-                        Dim fila As DataRow = conjuntoDatos.Tables("Codigo").Rows(0)
-                        TextBox8.Text = fila("Nombre").ToString()
-                    Else
-                        MessageBox.Show("No se encontró el Departamento especificado.", "No Existe", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    End If
+                    Using adaptador As New SqlDataAdapter(comando)
+                        Dim conjuntoDatos As New DataSet()
+                        adaptador.Fill(conjuntoDatos, "Codigo")
+                        If conjuntoDatos.Tables("Codigo").Rows.Count > 0 Then
+                            Dim fila As DataRow = conjuntoDatos.Tables("Codigo").Rows(0)
+                            TextBox8.Text = fila("Nombre").ToString()
+                        Else
+                            MessageBox.Show("No se encontró el Departamento especificado.", "No Existe", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        End If
+                    End Using
                 End Using
             Catch ex As Exception
                 MessageBox.Show("Error al buscar el Departamento: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Finally
-                conexion.Close()
             End Try
-        Else
         End If
     End Sub
-
     Private Sub TextBox11_TextChanged(sender As Object, e As EventArgs) Handles TextBox11.TextChanged
         If TextBox11.Text.Length = 2 Then
-            conect()
-
             If conexion.State = ConnectionState.Closed Then
                 conexion.Open()
             End If
@@ -89,27 +64,21 @@ Public Class frmNuevoTramite
                 Dim consulta As String = "SELECT * FROM Ciudades WHERE Codigo = @Codigo"
                 Using comando As New SqlCommand(consulta, conexion)
                     comando.Parameters.AddWithValue("@Codigo", terminoBusqueda)
-                    Dim adaptador As New SqlDataAdapter(comando)
-                    Dim conjuntoDatos As New DataSet()
-                    adaptador.Fill(conjuntoDatos, "Codigo")
-                    If conjuntoDatos.Tables("Codigo").Rows.Count > 0 Then
-                        Dim fila As DataRow = conjuntoDatos.Tables("Codigo").Rows(0)
-                        TextBox10.Text = fila("Nombre").ToString()
-                    Else
-                        MessageBox.Show("No se encontró el Municipio especificado.", "No Existe", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    End If
+                    Using adaptador As New SqlDataAdapter(comando)
+                        Dim conjuntoDatos As New DataSet()
+                        adaptador.Fill(conjuntoDatos, "Codigo")
+                        If conjuntoDatos.Tables("Codigo").Rows.Count > 0 Then
+                            Dim fila As DataRow = conjuntoDatos.Tables("Codigo").Rows(0)
+                            TextBox10.Text = fila("Nombre").ToString()
+                        Else
+                            MessageBox.Show("No se encontró el Municipio especificado.", "No Existe", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        End If
+                    End Using
                 End Using
             Catch ex As Exception
                 MessageBox.Show("Error al buscar el Municipio: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Finally
-                conexion.Close()
             End Try
-        Else
         End If
-    End Sub
-
-    Private Sub TextBox17_TextChanged(sender As Object, e As EventArgs) Handles TextBox17.TextChanged
-        TextBox18.Text = Val(TextBox16.Text) - Val(TextBox17.Text)
     End Sub
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         TextBox2.Text = " "
@@ -156,25 +125,34 @@ Public Class frmNuevoTramite
         Finally
             conexion.Close()
         End Try
+        DeshabilitarCampos()
+        Button9.Enabled = True
+        Button8.Enabled = True
     End Sub
     Private Sub MostrarCantidadFilas()
-        conect()
+        If Not conexion.State = ConnectionState.Open Then
+            conect()
+        End If
         Dim query As String = "SELECT COUNT(*) FROM clientes;"
-
-        Using connection As SqlConnection = conexion
-            connection.Open()
-            Using command As New SqlCommand(query, connection)
-                Dim result As Integer = CInt(command.ExecuteScalar())
-                TextBox1.Text = result.ToString()
+        Try
+            Using connection As SqlConnection = conexion
+                If Not connection.State = ConnectionState.Open Then
+                    connection.Open()
+                End If
+                Using command As New SqlCommand(query, connection)
+                    Dim result As Integer = CInt(command.ExecuteScalar())
+                    TextBox1.Text = result.ToString()
+                End Using
             End Using
-        End Using
-        Dim conteo As Integer = CInt(TextBox1.Text) + 1
-        TextBox1.Text = conteo.ToString().PadLeft(4, "0"c)
+            Dim conteo As Integer = CInt(TextBox1.Text) + 1
+            TextBox1.Text = conteo.ToString().PadLeft(4, "0"c)
+        Catch ex As Exception
+        End Try
     End Sub
-    Private Sub TextBox1_LostFocus(sender As Object, e As EventArgs) Handles TextBox1.LostFocus
+    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
+        Button2.Enabled = False
         Dim cargarsexo As String
         If TextBox1.Text.Length = 4 Then
-            conect()
             If conexion.State = ConnectionState.Closed Then
                 conexion.Open()
             End If
@@ -210,11 +188,7 @@ Public Class frmNuevoTramite
                         TextBox15.Text = fila("observacion").ToString()
                         Button2.Enabled = False
                     Else
-                        Dim respuesta As DialogResult = MessageBox.Show("No se encontró el Cliente especificado. ¿Desea crear uno nuevo?", "No Existe", MessageBoxButtons.YesNo, MessageBoxIcon.Information)
-                        If respuesta = DialogResult.Yes Then
-                            Button2.Enabled = True
-                        Else
-                        End If
+                        MessageBox.Show("No se encontró el Cliente especificado.", "No Existe", MessageBoxButtons.OK, MessageBoxIcon.Information)
                     End If
                 End Using
             Catch ex As Exception
@@ -222,30 +196,82 @@ Public Class frmNuevoTramite
             Finally
                 conexion.Close()
             End Try
-        Else
         End If
-        If TextBox1.Text <> "" Then
-            TextBox2.Enabled = True
-            MaskedTextBox1.Enabled = True
-            TextBox4.Enabled = True
-            TextBox5.Enabled = False
-            TextBox6.Enabled = False
-            TextBox7.Enabled = True
-            TextBox8.Enabled = False
-            TextBox9.Enabled = True
-            TextBox10.Enabled = False
-            TextBox11.Enabled = True
-            TextBox12.Enabled = True
-            TextBox13.Enabled = True
-            TextBox14.Enabled = True
-            TextBox15.Enabled = True
-            RadioButton1.Enabled = True
-            RadioButton2.Enabled = True
-            MaskedTextBox4.Enabled = True
-            Button7.Enabled = True
+        If TextBox1.Text = "" Then
+            Limpiarcampos()
+            Button2.Enabled = True
         End If
+        Button9.Enabled = True
     End Sub
+    Private Sub HabilitarCampos()
+        TextBox2.Enabled = True
+        MaskedTextBox1.Enabled = True
+        TextBox4.Enabled = True
+        TextBox5.Enabled = False
+        TextBox6.Enabled = False
+        TextBox7.Enabled = True
+        TextBox8.Enabled = False
+        TextBox9.Enabled = True
+        TextBox10.Enabled = False
+        TextBox11.Enabled = True
+        TextBox12.Enabled = True
+        TextBox13.Enabled = True
+        TextBox14.Enabled = True
+        TextBox15.Enabled = True
+        RadioButton1.Enabled = True
+        RadioButton2.Enabled = True
+        MaskedTextBox4.Enabled = True
+        Button7.Enabled = True
+    End Sub
+    Private Sub DeshabilitarCampos()
+        TextBox2.Enabled = False
+        MaskedTextBox1.Enabled = False
+        TextBox4.Enabled = False
+        TextBox5.Enabled = False
+        TextBox6.Enabled = False
+        TextBox7.Enabled = False
+        TextBox8.Enabled = False
+        TextBox9.Enabled = False
+        TextBox10.Enabled = False
+        TextBox11.Enabled = False
+        TextBox12.Enabled = False
+        TextBox13.Enabled = False
+        TextBox14.Enabled = False
+        TextBox15.Enabled = False
+        RadioButton1.Enabled = False
+        RadioButton2.Enabled = False
+        MaskedTextBox4.Enabled = False
+        Button7.Enabled = False
+    End Sub
+    Private Sub Limpiarcampos()
+        TextBox2.Clear()
+        MaskedTextBox4.Clear()
+        MaskedTextBox1.Clear()
+        TextBox4.Clear()
+        TextBox5.Clear()
+        TextBox6.Clear()
+        TextBox7.Clear()
+        TextBox8.Clear()
+        TextBox9.Clear()
+        TextBox10.Clear()
+        TextBox11.Clear()
+        TextBox12.Clear()
+        TextBox13.Clear()
+        TextBox14.Clear()
+        TextBox15.Clear()
 
+        TextBox16.Text = 0.00
+        TextBox17.Text = 0.00
+        TextBox18.Text = 0.00
+        TextBox19.Text = 0.00
+        TextBox20.Text = 0.00
+        TextBox21.Text = 0.00
+        TextBox23.Text = 0.00
+        TextBox25.Text = 0.00
+        TextBox26.Text = 0.00
+        MaskedTextBox2.Clear()
+        MaskedTextBox3.Clear()
+    End Sub
     Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click
         Me.Close()
     End Sub
@@ -289,12 +315,12 @@ Public Class frmNuevoTramite
         Else
             MessageBox.Show("Por favor, ingrese Numero de Expediene.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning)
         End If
+        DeshabilitarCampos()
+        Button9.Enabled = True
+        Button8.Enabled = True
     End Sub
-
     Private Sub TextBox4_TextChanged(sender As Object, e As EventArgs) Handles TextBox4.TextChanged
         If TextBox4.Text.Length = 3 Then
-            conect()
-
             If conexion.State = ConnectionState.Closed Then
                 conexion.Open()
             End If
@@ -303,29 +329,24 @@ Public Class frmNuevoTramite
                 Dim consulta As String = "SELECT * FROM Profeciones WHERE Codigo = @Codigo"
                 Using comando As New SqlCommand(consulta, conexion)
                     comando.Parameters.AddWithValue("@Codigo", terminoBusqueda)
-                    Dim adaptador As New SqlDataAdapter(comando)
-                    Dim conjuntoDatos As New DataSet()
-                    adaptador.Fill(conjuntoDatos, "Codigo")
-                    If conjuntoDatos.Tables("Codigo").Rows.Count > 0 Then
-                        Dim fila As DataRow = conjuntoDatos.Tables("Codigo").Rows(0)
-                        TextBox5.Text = fila("Nombre").ToString()
-                    Else
-                        MessageBox.Show("No se encontró el Departamento especificado.", "No Existe", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    End If
+                    Using adaptador As New SqlDataAdapter(comando)
+                        Dim conjuntoDatos As New DataSet()
+                        adaptador.Fill(conjuntoDatos, "Codigo")
+                        If conjuntoDatos.Tables("Codigo").Rows.Count > 0 Then
+                            Dim fila As DataRow = conjuntoDatos.Tables("Codigo").Rows(0)
+                            TextBox5.Text = fila("Nombre").ToString()
+                        Else
+                            MessageBox.Show("No se encontró la Profesión especificada.", "No Existe", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        End If
+                    End Using
                 End Using
             Catch ex As Exception
-                MessageBox.Show("Error al buscar el Departamento: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Finally
-                conexion.Close()
+                MessageBox.Show("Error al buscar la Profesión: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
-        Else
         End If
     End Sub
-
     Private Sub TextBox7_TextChanged(sender As Object, e As EventArgs) Handles TextBox7.TextChanged
         If TextBox7.Text.Length = 3 Then
-            conect()
-
             If conexion.State = ConnectionState.Closed Then
                 conexion.Open()
             End If
@@ -334,26 +355,34 @@ Public Class frmNuevoTramite
                 Dim consulta As String = "SELECT * FROM Ocupaciones WHERE Codigo = @Codigo"
                 Using comando As New SqlCommand(consulta, conexion)
                     comando.Parameters.AddWithValue("@Codigo", terminoBusqueda)
-                    Dim adaptador As New SqlDataAdapter(comando)
-                    Dim conjuntoDatos As New DataSet()
-                    adaptador.Fill(conjuntoDatos, "Codigo")
-                    If conjuntoDatos.Tables("Codigo").Rows.Count > 0 Then
-                        Dim fila As DataRow = conjuntoDatos.Tables("Codigo").Rows(0)
-                        TextBox6.Text = fila("Nombre").ToString()
-                    Else
-                        MessageBox.Show("No se encontró el Departamento especificado.", "No Existe", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    End If
+                    Using adaptador As New SqlDataAdapter(comando)
+                        Dim conjuntoDatos As New DataSet()
+                        adaptador.Fill(conjuntoDatos, "Codigo")
+                        If conjuntoDatos.Tables("Codigo").Rows.Count > 0 Then
+                            Dim fila As DataRow = conjuntoDatos.Tables("Codigo").Rows(0)
+                            TextBox6.Text = fila("Nombre").ToString()
+                        Else
+                            MessageBox.Show("No se encontró la Ocupación especificada.", "No Existe", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        End If
+                    End Using
                 End Using
             Catch ex As Exception
-                MessageBox.Show("Error al buscar el Departamento: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Finally
-                conexion.Close()
+                MessageBox.Show("Error al buscar la Ocupación: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
-        Else
         End If
     End Sub
     Private Sub Button12_Click(sender As Object, e As EventArgs) Handles Button12.Click
-        ' Obtener los datos del préstamo
+        actualizarDataGrid()
+    End Sub
+    Private Function CalcCuotaMensual(monto As Decimal, tasaInteres As Decimal, plazo As Integer) As Decimal
+        Dim cuotaMensual As Decimal
+        cuotaMensual = monto * (tasaInteres / (1 - (1 + tasaInteres) ^ -plazo))
+        Return cuotaMensual
+    End Function
+    Private Sub MaskedTextBox3_DoubleClick(sender As Object, e As EventArgs) Handles MaskedTextBox3.DoubleClick
+        fechaPrimerPago()
+    End Sub
+    Private Sub actualizarDataGrid()
         Dim monto As Decimal = Decimal.Parse(TextBox18.Text)
         Dim tasaInteres As Decimal
         Dim plazo As Integer
@@ -372,19 +401,20 @@ Public Class frmNuevoTramite
             dias = 7
             plazo = Val(TextBox20.Text) * 4.25
         End If
-
-
         cuotaMensual = CalcCuotaMensual(monto, tasaInteres, plazo)
-
-
         Dim saldo As Decimal = monto
         Dim fechaPago As DateTime = MaskedTextBox3.Text
-
+        Dim sumaCapital As Decimal = 0
+        Dim sumaInteres As Decimal = 0
+        Dim sumaCuotas As Decimal = 0
         DataGridView1.Rows.Clear()
         For i As Integer = 1 To plazo
             Dim interes As Decimal = saldo * tasaInteres
             Dim capital As Decimal = cuotaMensual - interes
             saldo -= capital
+            sumaCapital += capital
+            sumaInteres += interes
+            sumaCuotas += cuotaMensual
             DataGridView1.Rows.Add(i, fechaPago.ToShortDateString(), capital.ToString("0.00"), interes.ToString("0.00"), cuotaMensual.ToString("0.00"), saldo.ToString("0.00"), dias)
             If RadioButton5.Checked = True Then
                 fechaPago = fechaPago.AddMonths(1)
@@ -394,25 +424,129 @@ Public Class frmNuevoTramite
                 fechaPago = fechaPago.AddDays(7)
             End If
         Next
+        TextBox23.Text = sumaCapital.ToString("0.00")
+        TextBox25.Text = sumaInteres.ToString("0.00")
+        TextBox26.Text = sumaCuotas.ToString("0.00")
     End Sub
-    Private Function CalcCuotaMensual(monto As Decimal, tasaInteres As Decimal, plazo As Integer) As Decimal
-        Dim cuotaMensual As Decimal
-        cuotaMensual = monto * (tasaInteres / (1 - (1 + tasaInteres) ^ -plazo))
-        Return cuotaMensual
-    End Function
-    Private Sub MaskedTextBox3_DoubleClick(sender As Object, e As EventArgs) Handles MaskedTextBox3.DoubleClick
-        Dim fechaPago As DateTime
-        If DateTime.TryParse(MaskedTextBox2.Text, fechaPago) Then
+    Private Sub fechaPrimerPago()
+        Dim PrimerPago As DateTime
+        If DateTime.TryParse(MaskedTextBox2.Text, PrimerPago) Then
             Select Case True
                 Case RadioButton5.Checked
-                    MaskedTextBox3.Text = fechaPago.AddMonths(1).ToString("dd/MM/yyyy")
+                    MaskedTextBox3.Text = PrimerPago.AddMonths(1).ToString("dd/MM/yyyy")
                 Case RadioButton4.Checked
-                    MaskedTextBox3.Text = fechaPago.AddDays(15).ToString("dd/MM/yyyy")
+                    MaskedTextBox3.Text = PrimerPago.AddDays(15).ToString("dd/MM/yyyy")
                 Case RadioButton3.Checked
-                    MaskedTextBox3.Text = fechaPago.AddDays(7).ToString("dd/MM/yyyy")
+                    MaskedTextBox3.Text = PrimerPago.AddDays(7).ToString("dd/MM/yyyy")
             End Select
         Else
             MessageBox.Show("La fecha ingresada en MaskedTextBox2 no es válida.")
         End If
+    End Sub
+
+    Private Sub TextBox16_TextChanged(sender As Object, e As EventArgs) Handles TextBox16.TextChanged
+        calcularSaldoAFinanciar()
+    End Sub
+    Private Sub TextBox17_TextChanged(sender As Object, e As EventArgs) Handles TextBox17.TextChanged
+        calcularSaldoAFinanciar()
+    End Sub
+    Private Sub calcularSaldoAFinanciar()
+        TextBox18.Text = Val(TextBox16.Text) - Val(TextBox17.Text)
+    End Sub
+
+    Private Sub TextBox16_LostFocus(sender As Object, e As EventArgs) Handles TextBox16.LostFocus
+        actualizarDataGrid()
+    End Sub
+
+    Private Sub TextBox17_LostFocus(sender As Object, e As EventArgs) Handles TextBox17.LostFocus
+        actualizarDataGrid()
+    End Sub
+
+    Private Sub TextBox19_LostFocus(sender As Object, e As EventArgs) Handles TextBox19.LostFocus
+        actualizarDataGrid()
+    End Sub
+
+    Private Sub TextBox20_LostFocus(sender As Object, e As EventArgs) Handles TextBox20.LostFocus
+        actualizarDataGrid()
+    End Sub
+
+    Private Sub MaskedTextBox2_LostFocus(sender As Object, e As EventArgs) Handles MaskedTextBox2.LostFocus
+        actualizarDataGrid()
+    End Sub
+
+    Private Sub RadioButton4_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton4.CheckedChanged
+        actualizarDataGrid()
+    End Sub
+
+    Private Sub RadioButton3_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton3.CheckedChanged
+        actualizarDataGrid()
+    End Sub
+
+    Private Sub frmNuevoTramite_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
+        If conexion IsNot Nothing AndAlso conexion.State = ConnectionState.Open Then
+            conexion.Close()
+        End If
+    End Sub
+    Private Sub TextBox7_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox7.KeyDown
+        If e.KeyCode = Keys.F1 Then
+            e.Handled = True
+            e.SuppressKeyPress = True
+            MostrarListaOcupaciones()
+        End If
+    End Sub
+    Private Sub MostrarListaOcupaciones()
+        Using listaOcupacionesForm As New frmListaOcupaciones()
+            If listaOcupacionesForm.ShowDialog() = DialogResult.OK Then
+                TextBox7.Text = listaOcupacionesForm.CodigoOcupacionSeleccionada
+            End If
+        End Using
+    End Sub
+
+    Private Sub TextBox4_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox4.KeyDown
+        If e.KeyCode = Keys.F1 Then
+            e.Handled = True
+            e.SuppressKeyPress = True
+            MostrarListaProfeciones()
+        End If
+    End Sub
+    Private Sub MostrarListaProfeciones()
+        Using listaProfecionesForm As New frmListaProfeciones()
+            If listaProfecionesForm.ShowDialog() = DialogResult.OK Then
+                TextBox4.Text = listaProfecionesForm.CodigoProfecionSeleccionada
+            End If
+        End Using
+    End Sub
+    Private Sub TextBox9_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox9.KeyDown
+        If e.KeyCode = Keys.F1 Then
+            e.Handled = True
+            e.SuppressKeyPress = True
+            MostrarListaDepartamentos()
+        End If
+    End Sub
+    Private Sub MostrarListaDepartamentos()
+        Using listaDepartamentoForm As New frmListaDepartamento()
+            If listaDepartamentoForm.ShowDialog() = DialogResult.OK Then
+                TextBox9.Text = listaDepartamentoForm.CodigoDepartamentoSeleccionada
+            End If
+        End Using
+    End Sub
+    Private Sub TextBox11_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox11.KeyDown
+        If e.KeyCode = Keys.F1 Then
+            e.Handled = True
+            e.SuppressKeyPress = True
+            MostrarListaCiudades()
+        End If
+    End Sub
+    Private Sub MostrarListaCiudades()
+        Using listaCiudadesForm As New frmListaCiudades()
+            If listaCiudadesForm.ShowDialog() = DialogResult.OK Then
+                TextBox11.Text = listaCiudadesForm.CodigoCiudadesSeleccionada
+            End If
+        End Using
+    End Sub
+
+    Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
+        HabilitarCampos()
+        Button9.Enabled = False
     End Sub
 End Class

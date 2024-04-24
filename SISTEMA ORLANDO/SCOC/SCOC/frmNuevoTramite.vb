@@ -10,6 +10,7 @@ Public Class frmNuevoTramite
         DataGridView1.DefaultCellStyle.WrapMode = DataGridViewTriState.True
         MaskedTextBox4.Text = DateTime.Now.ToString("dd/MM/yyyy")
         MaskedTextBox2.Text = DateTime.Now.ToString("dd/MM/yyyy")
+        MaskedTextBox3.Text = DateTime.Now.ToString("dd/MM/yyyy")
 
 
         If RadioButton3.Checked = True Then
@@ -110,28 +111,6 @@ Public Class frmNuevoTramite
     Private Sub TextBox17_TextChanged(sender As Object, e As EventArgs) Handles TextBox17.TextChanged
         TextBox18.Text = Val(TextBox16.Text) - Val(TextBox17.Text)
     End Sub
-
-    Private Sub TextBox16_LostFocus(sender As Object, e As EventArgs) Handles TextBox16.LostFocus
-        Dim cantidad As Double
-        If Double.TryParse(TextBox16.Text, cantidad) Then
-            TextBox16.Text = cantidad.ToString("#,###,##0.00")
-        End If
-    End Sub
-
-    Private Sub TextBox17_LostFocus(sender As Object, e As EventArgs) Handles TextBox17.LostFocus
-        Dim cantidad As Double
-        If Double.TryParse(TextBox17.Text, cantidad) Then
-            TextBox17.Text = cantidad.ToString("#,###,##0.00")
-        End If
-    End Sub
-
-    Private Sub TextBox18_LostFocus(sender As Object, e As EventArgs) Handles TextBox18.LostFocus
-        Dim cantidad As Double
-        If Double.TryParse(TextBox18.Text, cantidad) Then
-            TextBox18.Text = cantidad.ToString("#,###,##0.00")
-        End If
-    End Sub
-
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         TextBox2.Text = " "
         MaskedTextBox1.Text = 0 - 0 - 0
@@ -311,118 +290,6 @@ Public Class frmNuevoTramite
             MessageBox.Show("Por favor, ingrese Numero de Expediene.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning)
         End If
     End Sub
-    Private Function CalcularFechaPrimeraCuota(fechaDesembolso As Date, periodoPago As String) As Date
-        Dim fechaPrimeraCuota As Date = fechaDesembolso
-
-        Select Case periodoPago
-            Case "Semanal"
-                fechaPrimeraCuota = fechaDesembolso.AddDays(7)
-            Case "Quincenal"
-                fechaPrimeraCuota = fechaDesembolso.AddDays(15)
-            Case "Mensual"
-                fechaPrimeraCuota = fechaDesembolso.AddMonths(1)
-        End Select
-
-        Return fechaPrimeraCuota
-    End Function
-    Private Function GetPeriodoPago() As String
-        If RadioButton3.Checked Then
-            Return "Semanal"
-        ElseIf RadioButton4.Checked Then
-            Return "Quincenal"
-        ElseIf RadioButton5.Checked Then
-            Return "Mensual"
-        End If
-
-        Return ""
-    End Function
-    Private Function GetDiasPago() As Integer
-        If RadioButton3.Checked Then
-            Return 7
-        ElseIf RadioButton4.Checked Then
-            Return 15
-        ElseIf RadioButton5.Checked Then
-            Return 30 ' O el valor que consideres adecuado para un mes
-        End If
-        Return 0
-    End Function
-    Public Class PlanPago
-        Public Property NumeroPago As Integer
-        Public Property FechaPago As Date
-        Public Property Capital As Decimal
-        Public Property PagoExtra As Decimal
-        Public Property Interes As Decimal
-        Public Property Cuota As Decimal
-        Public Property Saldo As Decimal
-        Public Property Dia As Integer
-    End Class
-    Private Function CalcularPlanPago(capital As Decimal, pagoExtra As Decimal, interes As Decimal, plazo As Integer, fechaPrimeraCuota As Date, periodoPago As String) As List(Of PlanPago)
-        Dim planPagos As New List(Of PlanPago)
-
-        Dim saldo As Decimal = capital
-        Dim cuotaCapital As Decimal = capital / plazo
-        Dim cuotaInteres As Decimal = saldo * (interes / 100) / IIf(periodoPago = "Mensual", 12, 1)
-
-        For i As Integer = 1 To plazo
-            Dim cuotaTotal As Decimal = cuotaCapital + cuotaInteres + pagoExtra
-            Dim fechaPago As Date = fechaPrimeraCuota.AddMonths(i - 1)
-
-            If periodoPago = "Semanal" Then
-                fechaPago = fechaPago.AddDays(7)
-            ElseIf periodoPago = "Quincenal" Then
-                fechaPago = fechaPago.AddDays(15)
-            End If
-
-            saldo -= cuotaCapital
-
-            If saldo < 0 Then
-                cuotaTotal += saldo
-                saldo = 0
-            End If
-
-            Dim planPago As New PlanPago With {
-            .NumeroPago = i,
-            .FechaPago = fechaPago,
-            .Capital = cuotaCapital,
-            .PagoExtra = pagoExtra,
-            .Interes = cuotaInteres,
-            .Cuota = cuotaTotal,
-            .Saldo = saldo
-        }
-
-            planPagos.Add(planPago)
-        Next
-
-        Return planPagos
-    End Function
-    Private Sub Button12_Click(sender As Object, e As EventArgs) Handles Button12.Click
-        Dim fechaDesembolso As Date = DateTime.ParseExact(MaskedTextBox2.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture)
-        Dim fechaPrimeraCuota As Date = CalcularFechaPrimeraCuota(fechaDesembolso, GetPeriodoPago())
-
-        Dim planPagos As List(Of PlanPago) = CalcularPlanPago(Convert.ToDecimal(TextBox16.Text), Convert.ToDecimal(TextBox17.Text), Convert.ToDecimal(TextBox19.Text), Convert.ToInt32(TextBox20.Text), fechaPrimeraCuota, GetPeriodoPago())
-
-        DataGridView1.Rows.Clear()
-        For Each pago As PlanPago In planPagos
-            Dim diasPago As Integer = GetDiasPago()
-
-            DataGridView1.Rows.Add(pago.NumeroPago, pago.FechaPago.ToShortDateString(), pago.Capital, pago.PagoExtra, pago.Interes, pago.Cuota, pago.Saldo, diasPago)
-        Next
-
-        Dim sumaCapital As Decimal = planPagos.Sum(Function(p) p.Capital)
-        Dim sumaPagoExtra As Decimal = planPagos.Sum(Function(p) p.PagoExtra)
-        Dim sumaInteres As Decimal = planPagos.Sum(Function(p) p.Interes)
-        Dim sumaCuota As Decimal = planPagos.Sum(Function(p) p.Cuota)
-        Dim sumaSaldo As Decimal = planPagos.Sum(Function(p) p.Saldo)
-
-        TextBox23.Text = sumaCapital.ToString()
-        TextBox24.Text = sumaPagoExtra.ToString()
-        TextBox25.Text = sumaInteres.ToString()
-        TextBox26.Text = sumaCuota.ToString()
-    End Sub
-
-    Private Sub MaskedTextBox2_MaskInputRejected(sender As Object, e As MaskInputRejectedEventArgs) Handles MaskedTextBox2.MaskInputRejected
-
-    End Sub
 
     Private Sub TextBox4_TextChanged(sender As Object, e As EventArgs) Handles TextBox4.TextChanged
         If TextBox4.Text.Length = 3 Then
@@ -483,6 +350,69 @@ Public Class frmNuevoTramite
                 conexion.Close()
             End Try
         Else
+        End If
+    End Sub
+    Private Sub Button12_Click(sender As Object, e As EventArgs) Handles Button12.Click
+        ' Obtener los datos del préstamo
+        Dim monto As Decimal = Decimal.Parse(TextBox18.Text)
+        Dim tasaInteres As Decimal
+        Dim plazo As Integer
+        Dim cuotaMensual As Decimal
+        Dim dias As Integer
+        If RadioButton5.Checked = True Then
+            tasaInteres = (Val(TextBox19.Text) / 12) / 100
+            dias = 30
+            plazo = Val(TextBox20.Text) * 1
+        ElseIf RadioButton4.Checked = True Then
+            tasaInteres = (Val(TextBox19.Text) / 24) / 100
+            dias = 15
+            plazo = Val(TextBox20.Text) * 2
+        ElseIf RadioButton3.Checked = True Then
+            tasaInteres = ((Val(TextBox19.Text) / 12) / 4.25) / 100
+            dias = 7
+            plazo = Val(TextBox20.Text) * 4.25
+        End If
+
+
+        cuotaMensual = CalcCuotaMensual(monto, tasaInteres, plazo)
+
+
+        Dim saldo As Decimal = monto
+        Dim fechaPago As DateTime = MaskedTextBox3.Text
+
+        DataGridView1.Rows.Clear()
+        For i As Integer = 1 To plazo
+            Dim interes As Decimal = saldo * tasaInteres
+            Dim capital As Decimal = cuotaMensual - interes
+            saldo -= capital
+            DataGridView1.Rows.Add(i, fechaPago.ToShortDateString(), capital.ToString("0.00"), interes.ToString("0.00"), cuotaMensual.ToString("0.00"), saldo.ToString("0.00"), dias)
+            If RadioButton5.Checked = True Then
+                fechaPago = fechaPago.AddMonths(1)
+            ElseIf RadioButton4.Checked = True Then
+                fechaPago = fechaPago.AddDays(15)
+            ElseIf RadioButton3.Checked = True Then
+                fechaPago = fechaPago.AddDays(7)
+            End If
+        Next
+    End Sub
+    Private Function CalcCuotaMensual(monto As Decimal, tasaInteres As Decimal, plazo As Integer) As Decimal
+        Dim cuotaMensual As Decimal
+        cuotaMensual = monto * (tasaInteres / (1 - (1 + tasaInteres) ^ -plazo))
+        Return cuotaMensual
+    End Function
+    Private Sub MaskedTextBox3_DoubleClick(sender As Object, e As EventArgs) Handles MaskedTextBox3.DoubleClick
+        Dim fechaPago As DateTime
+        If DateTime.TryParse(MaskedTextBox2.Text, fechaPago) Then
+            Select Case True
+                Case RadioButton5.Checked
+                    MaskedTextBox3.Text = fechaPago.AddMonths(1).ToString("dd/MM/yyyy")
+                Case RadioButton4.Checked
+                    MaskedTextBox3.Text = fechaPago.AddDays(15).ToString("dd/MM/yyyy")
+                Case RadioButton3.Checked
+                    MaskedTextBox3.Text = fechaPago.AddDays(7).ToString("dd/MM/yyyy")
+            End Select
+        Else
+            MessageBox.Show("La fecha ingresada en MaskedTextBox2 no es válida.")
         End If
     End Sub
 End Class

@@ -3,6 +3,7 @@ Imports System.Globalization
 Imports System.Linq
 Public Class frmNuevoTramite
     Public sexo As Char
+    ''Carga Y Cierre del formulario Info General
     Private Sub frmNuevoTramite_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         conexion = New SqlConnection("Data Source=CESAR\SQLCREDI;Initial Catalog=SistemaOrlando;Persist Security Info=True;User ID=sa;Password=1625")
         comando = New SqlCommand()
@@ -13,7 +14,6 @@ Public Class frmNuevoTramite
             MessageBox.Show("Error al conectar a la base de datos: " & ex.Message, "Error de conexión", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Me.Close()
         End Try
-
         DataGridView1.RowHeadersVisible = False
         DataGridView1.AllowUserToResizeRows = True
         DataGridView1.DefaultCellStyle.WrapMode = DataGridViewTriState.True
@@ -28,181 +28,12 @@ Public Class frmNuevoTramite
         End If
         DeshabilitarCampos()
     End Sub
-    Private Sub TextBox9_TextChanged(sender As Object, e As EventArgs) Handles TextBox9.TextChanged
-        If TextBox9.Text.Length = 2 Then
-            If conexion.State = ConnectionState.Closed Then
-                conexion.Open()
-            End If
-            Try
-                Dim terminoBusqueda As String = TextBox9.Text.Trim()
-                Dim consulta As String = "SELECT * FROM Departamentos WHERE Codigo = @Codigo"
-                Using comando As New SqlCommand(consulta, conexion)
-                    comando.Parameters.AddWithValue("@Codigo", terminoBusqueda)
-                    Using adaptador As New SqlDataAdapter(comando)
-                        Dim conjuntoDatos As New DataSet()
-                        adaptador.Fill(conjuntoDatos, "Codigo")
-                        If conjuntoDatos.Tables("Codigo").Rows.Count > 0 Then
-                            Dim fila As DataRow = conjuntoDatos.Tables("Codigo").Rows(0)
-                            TextBox8.Text = fila("Nombre").ToString()
-                        Else
-                            MessageBox.Show("No se encontró el Departamento especificado.", "No Existe", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                        End If
-                    End Using
-                End Using
-            Catch ex As Exception
-                MessageBox.Show("Error al buscar el Departamento: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            End Try
-        End If
-    End Sub
-    Private Sub TextBox11_TextChanged(sender As Object, e As EventArgs) Handles TextBox11.TextChanged
-        If TextBox11.Text.Length = 2 Then
-            If conexion.State = ConnectionState.Closed Then
-                conexion.Open()
-            End If
-            Try
-                Dim terminoBusqueda As String = TextBox9.Text.Trim() & TextBox11.Text.Trim()
-                Dim consulta As String = "SELECT * FROM Ciudades WHERE Codigo = @Codigo"
-                Using comando As New SqlCommand(consulta, conexion)
-                    comando.Parameters.AddWithValue("@Codigo", terminoBusqueda)
-                    Using adaptador As New SqlDataAdapter(comando)
-                        Dim conjuntoDatos As New DataSet()
-                        adaptador.Fill(conjuntoDatos, "Codigo")
-                        If conjuntoDatos.Tables("Codigo").Rows.Count > 0 Then
-                            Dim fila As DataRow = conjuntoDatos.Tables("Codigo").Rows(0)
-                            TextBox10.Text = fila("Nombre").ToString()
-                        Else
-                            MessageBox.Show("No se encontró el Municipio especificado.", "No Existe", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                        End If
-                    End Using
-                End Using
-            Catch ex As Exception
-                MessageBox.Show("Error al buscar el Municipio: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            End Try
-        End If
-    End Sub
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        TextBox2.Text = " "
-        MaskedTextBox1.Text = 0 - 0 - 0
-        TextBox4.Text = " "
-        TextBox5.Text = " "
-        TextBox6.Text = " "
-        TextBox7.Text = " "
-        TextBox8.Text = " "
-        TextBox9.Text = " "
-        TextBox10.Text = " "
-        TextBox11.Text = " "
-        TextBox12.Text = " "
-        TextBox13.Text = " "
-        TextBox14.Text = " "
-        TextBox15.Text = " "
-        MostrarCantidadFilas()
-        conect()
-        If conexion.State = ConnectionState.Closed Then
-            conexion.Open()
-        End If
-        Try
-            Dim consulta As String = "INSERT INTO clientes (IDCliente,	Nombre,	Direccion,	Departamento,	Ciudad,	Telefono,	Sexo,	Fecha,	fechatramite,	Id,	profecion,	ocupacion,	barrio,	observacion,	codigo_departamento,	codigo_municipio,	codigo_profecion,	codigo_ocupacion) VALUES (@IDCliente,	@Nombre,	@Direccion,	@Departamento,	@Ciudad,	@Telefono,	@Sexo,	@Fecha,	GETDATE(),	@Id,	@profecion,	@ocupacion,	@barrio,	@observacion,	@codigo_departamento,	@codigo_municipio,	@codigo_profecion,	@codigo_ocupacion)"
-            Dim comando As New SqlCommand(consulta, conexion)
-            comando.Parameters.AddWithValue("@IDCliente", TextBox1.Text)
-            comando.Parameters.AddWithValue("@Nombre", TextBox2.Text)
-            comando.Parameters.AddWithValue("@Direccion", TextBox13.Text)
-            comando.Parameters.AddWithValue("@Departamento", TextBox8.Text)
-            comando.Parameters.AddWithValue("@Ciudad", TextBox10.Text)
-            comando.Parameters.AddWithValue("@Telefono", TextBox14.Text)
-            comando.Parameters.AddWithValue("@Sexo", sexo)
-            comando.Parameters.AddWithValue("@Fecha", MaskedTextBox4.Text)
-            comando.Parameters.AddWithValue("@Id", TextBox6.Text)
-            comando.Parameters.AddWithValue("@profecion", TextBox5.Text)
-            comando.Parameters.AddWithValue("@ocupacion", TextBox6.Text)
-            comando.Parameters.AddWithValue("@barrio", TextBox12.Text)
-            comando.Parameters.AddWithValue("@observacion", TextBox15.Text)
-            comando.Parameters.AddWithValue("@codigo_departamento", TextBox9.Text)
-            comando.Parameters.AddWithValue("@codigo_municipio", TextBox11.Text)
-            comando.Parameters.AddWithValue("@codigo_profecion", TextBox4.Text)
-            comando.Parameters.AddWithValue("@codigo_ocupacion", TextBox7.Text)
-            comando.ExecuteNonQuery()
-        Catch ex As Exception
-        Finally
+    Private Sub frmNuevoTramite_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
+        If conexion IsNot Nothing AndAlso conexion.State = ConnectionState.Open Then
             conexion.Close()
-        End Try
-        DeshabilitarCampos()
-        Button9.Enabled = True
-        Button8.Enabled = True
-    End Sub
-    Private Sub MostrarCantidadFilas()
-        If Not conexion.State = ConnectionState.Open Then
-            conect()
         End If
-        Dim query As String = "SELECT COUNT(*) FROM clientes;"
-        Try
-            Using connection As SqlConnection = conexion
-                If Not connection.State = ConnectionState.Open Then
-                    connection.Open()
-                End If
-                Using command As New SqlCommand(query, connection)
-                    Dim result As Integer = CInt(command.ExecuteScalar())
-                    TextBox1.Text = result.ToString()
-                End Using
-            End Using
-            Dim conteo As Integer = CInt(TextBox1.Text) + 1
-            TextBox1.Text = conteo.ToString().PadLeft(4, "0"c)
-        Catch ex As Exception
-        End Try
     End Sub
-    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
-        Button2.Enabled = False
-        Dim cargarsexo As String
-        If TextBox1.Text.Length = 4 Then
-            If conexion.State = ConnectionState.Closed Then
-                conexion.Open()
-            End If
-            Try
-                Dim terminoBusqueda As String = TextBox1.Text.Trim()
-                Dim consulta As String = "SELECT * FROM Clientes WHERE IDCliente = @IDCliente"
-                Using comando As New SqlCommand(consulta, conexion)
-                    comando.Parameters.AddWithValue("@IDCliente", terminoBusqueda)
-                    Dim adaptador As New SqlDataAdapter(comando)
-                    Dim conjuntoDatos As New DataSet()
-                    adaptador.Fill(conjuntoDatos, "IDCliente")
-                    If conjuntoDatos.Tables("IDCliente").Rows.Count > 0 Then
-                        Dim fila As DataRow = conjuntoDatos.Tables("IDCliente").Rows(0)
-                        TextBox2.Text = fila("Nombre").ToString()
-                        TextBox13.Text = fila("Direccion").ToString()
-                        TextBox9.Text = fila("codigo_departamento").ToString()
-                        TextBox11.Text = fila("codigo_municipio").ToString()
-                        TextBox14.Text = fila("telefono").ToString()
-                        cargarsexo = fila("sexo").ToString()
-                        Select Case cargarsexo
-                            Case "M"
-                                RadioButton1.Checked = True
-                                RadioButton2.Checked = False
-                            Case "F"
-                                RadioButton2.Checked = True
-                                RadioButton1.Checked = False
-                        End Select
-                        MaskedTextBox4.Text = fila("fecha").ToString()
-                        MaskedTextBox1.Text = fila("Id").ToString()
-                        TextBox4.Text = fila("codigo_profecion").ToString()
-                        TextBox7.Text = fila("codigo_ocupacion").ToString()
-                        TextBox12.Text = fila("barrio").ToString()
-                        TextBox15.Text = fila("observacion").ToString()
-                        Button2.Enabled = False
-                    Else
-                        MessageBox.Show("No se encontró el Cliente especificado.", "No Existe", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    End If
-                End Using
-            Catch ex As Exception
-                MessageBox.Show("Error al buscar el Cliente" & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Finally
-                conexion.Close()
-            End Try
-        End If
-        If TextBox1.Text = "" Then
-            Limpiarcampos()
-            Button2.Enabled = True
-        End If
-        Button9.Enabled = True
-    End Sub
+    ''Funciones para los controles
     Private Sub HabilitarCampos()
         TextBox2.Enabled = True
         MaskedTextBox1.Enabled = True
@@ -272,10 +103,304 @@ Public Class frmNuevoTramite
         MaskedTextBox2.Clear()
         MaskedTextBox3.Clear()
     End Sub
-    Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click
-        Me.Close()
+    Private Sub MostrarCantidadFilas()
+        If Not conexion.State = ConnectionState.Open Then
+            conect()
+        End If
+        Dim query As String = "SELECT COUNT(*) FROM clientes;"
+        Try
+            Using connection As SqlConnection = conexion
+                If Not connection.State = ConnectionState.Open Then
+                    connection.Open()
+                End If
+                Using command As New SqlCommand(query, connection)
+                    Dim result As Integer = CInt(command.ExecuteScalar())
+                    TextBox1.Text = result.ToString()
+                End Using
+            End Using
+            Dim conteo As Integer = CInt(TextBox1.Text) + 1
+            TextBox1.Text = conteo.ToString().PadLeft(4, "0"c)
+        Catch ex As Exception
+        End Try
     End Sub
+    ''Busacar Datos del Cliente
+    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
+        Button2.Enabled = False
+        Dim cargarsexo As String
+        If TextBox1.Text.Length = 4 Then
+            If conexion.State = ConnectionState.Closed Then
+                conexion.Open()
+            End If
+            Try
+                Dim terminoBusqueda As String = TextBox1.Text.Trim()
+                Dim consulta As String = "SELECT * FROM Clientes WHERE IDCliente = @IDCliente"
+                Using comando As New SqlCommand(consulta, conexion)
+                    comando.Parameters.AddWithValue("@IDCliente", terminoBusqueda)
+                    Dim adaptador As New SqlDataAdapter(comando)
+                    Dim conjuntoDatos As New DataSet()
+                    adaptador.Fill(conjuntoDatos, "IDCliente")
+                    If conjuntoDatos.Tables("IDCliente").Rows.Count > 0 Then
+                        Dim fila As DataRow = conjuntoDatos.Tables("IDCliente").Rows(0)
+                        TextBox2.Text = fila("Nombre").ToString()
+                        TextBox13.Text = fila("Direccion").ToString()
+                        TextBox9.Text = fila("codigo_departamento").ToString()
+                        TextBox11.Text = fila("codigo_municipio").ToString()
+                        TextBox14.Text = fila("telefono").ToString()
+                        cargarsexo = fila("sexo").ToString()
+                        Select Case cargarsexo
+                            Case "M"
+                                RadioButton1.Checked = True
+                                RadioButton2.Checked = False
+                            Case "F"
+                                RadioButton2.Checked = True
+                                RadioButton1.Checked = False
+                        End Select
+                        MaskedTextBox4.Text = fila("fecha").ToString()
+                        MaskedTextBox1.Text = fila("Id").ToString()
+                        TextBox4.Text = fila("codigo_profecion").ToString()
+                        TextBox7.Text = fila("codigo_ocupacion").ToString()
+                        TextBox12.Text = fila("barrio").ToString()
+                        TextBox15.Text = fila("observacion").ToString()
+                        Button2.Enabled = False
+                        Button9.Enabled = True
+                        Button8.Enabled = True
+                        Button11.Enabled = True
+                    Else
+                        MessageBox.Show("No se encontró el Cliente especificado.", "No Existe", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        Limpiarcampos()
+                        Button2.Enabled = True
+                        Button11.Enabled = False
+                    End If
+                End Using
+            Catch ex As Exception
+                MessageBox.Show("Error al buscar el Cliente" & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Finally
+                conexion.Close()
+            End Try
+        End If
+        If TextBox1.Text = "" Then
+            Limpiarcampos()
+            Button2.Enabled = True
+            Button11.Enabled = False
+            Button9.Enabled = False
+            Button8.Enabled = False
+        End If
+    End Sub
+    ''Profecion
+    Private Sub TextBox4_TextChanged(sender As Object, e As EventArgs) Handles TextBox4.TextChanged
+        If TextBox4.Text.Length = 3 Then
+            If conexion.State = ConnectionState.Closed Then
+                conexion.Open()
+            End If
+            Try
+                Dim terminoBusqueda As String = TextBox4.Text.Trim()
+                Dim consulta As String = "SELECT * FROM Profeciones WHERE Codigo = @Codigo"
+                Using comando As New SqlCommand(consulta, conexion)
+                    comando.Parameters.AddWithValue("@Codigo", terminoBusqueda)
+                    Using adaptador As New SqlDataAdapter(comando)
+                        Dim conjuntoDatos As New DataSet()
+                        adaptador.Fill(conjuntoDatos, "Codigo")
+                        If conjuntoDatos.Tables("Codigo").Rows.Count > 0 Then
+                            Dim fila As DataRow = conjuntoDatos.Tables("Codigo").Rows(0)
+                            TextBox5.Text = fila("Nombre").ToString()
+                        Else
+                            MessageBox.Show("No se encontró la Profesión especificada.", "No Existe", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        End If
+                    End Using
+                End Using
+            Catch ex As Exception
+                MessageBox.Show("Error al buscar la Profesión: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+        End If
+    End Sub
+    Private Sub TextBox4_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox4.KeyDown
+        If e.KeyCode = Keys.F1 Then
+            e.Handled = True
+            e.SuppressKeyPress = True
+            MostrarListaProfeciones()
+        End If
+    End Sub
+    Private Sub MostrarListaProfeciones()
+        Using listaProfecionesForm As New frmListaProfeciones()
+            If listaProfecionesForm.ShowDialog() = DialogResult.OK Then
+                TextBox4.Text = listaProfecionesForm.CodigoProfecionSeleccionada
+            End If
+        End Using
+    End Sub
+    ''Ocupaciones
+    Private Sub TextBox7_TextChanged(sender As Object, e As EventArgs) Handles TextBox7.TextChanged
+        If TextBox7.Text.Length = 3 Then
+            If conexion.State = ConnectionState.Closed Then
+                conexion.Open()
+            End If
+            Try
+                Dim terminoBusqueda As String = TextBox7.Text.Trim()
+                Dim consulta As String = "SELECT * FROM Ocupaciones WHERE Codigo = @Codigo"
+                Using comando As New SqlCommand(consulta, conexion)
+                    comando.Parameters.AddWithValue("@Codigo", terminoBusqueda)
+                    Using adaptador As New SqlDataAdapter(comando)
+                        Dim conjuntoDatos As New DataSet()
+                        adaptador.Fill(conjuntoDatos, "Codigo")
+                        If conjuntoDatos.Tables("Codigo").Rows.Count > 0 Then
+                            Dim fila As DataRow = conjuntoDatos.Tables("Codigo").Rows(0)
+                            TextBox6.Text = fila("Nombre").ToString()
+                        Else
+                            MessageBox.Show("No se encontró la Ocupación especificada.", "No Existe", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        End If
+                    End Using
+                End Using
+            Catch ex As Exception
+                MessageBox.Show("Error al buscar la Ocupación: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+        End If
+    End Sub
+    Private Sub TextBox7_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox7.KeyDown
+        If e.KeyCode = Keys.F1 Then
+            e.Handled = True
+            e.SuppressKeyPress = True
+            MostrarListaOcupaciones()
+        End If
+    End Sub
+    Private Sub MostrarListaOcupaciones()
+        Using listaOcupacionesForm As New frmListaOcupaciones()
+            If listaOcupacionesForm.ShowDialog() = DialogResult.OK Then
+                TextBox7.Text = listaOcupacionesForm.CodigoOcupacionSeleccionada
+            End If
+        End Using
+    End Sub
+    ''Departamentos
+    Private Sub TextBox9_TextChanged(sender As Object, e As EventArgs) Handles TextBox9.TextChanged
+        If TextBox9.Text.Length = 2 Then
+            If conexion.State = ConnectionState.Closed Then
+                conexion.Open()
+            End If
+            Try
+                Dim terminoBusqueda As String = TextBox9.Text.Trim()
+                Dim consulta As String = "SELECT * FROM Departamentos WHERE Codigo = @Codigo"
+                Using comando As New SqlCommand(consulta, conexion)
+                    comando.Parameters.AddWithValue("@Codigo", terminoBusqueda)
+                    Using adaptador As New SqlDataAdapter(comando)
+                        Dim conjuntoDatos As New DataSet()
+                        adaptador.Fill(conjuntoDatos, "Codigo")
+                        If conjuntoDatos.Tables("Codigo").Rows.Count > 0 Then
+                            Dim fila As DataRow = conjuntoDatos.Tables("Codigo").Rows(0)
+                            TextBox8.Text = fila("Nombre").ToString()
+                        Else
+                            MessageBox.Show("No se encontró el Departamento especificado.", "No Existe", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        End If
+                    End Using
+                End Using
+            Catch ex As Exception
+                MessageBox.Show("Error al buscar el Departamento: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+        End If
+    End Sub
+    Private Sub TextBox9_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox9.KeyDown
+        If e.KeyCode = Keys.F1 Then
+            e.Handled = True
+            e.SuppressKeyPress = True
+            MostrarListaDepartamentos()
+        End If
+    End Sub
+    Private Sub MostrarListaDepartamentos()
+        Using listaDepartamentoForm As New frmListaDepartamento()
+            If listaDepartamentoForm.ShowDialog() = DialogResult.OK Then
+                TextBox9.Text = listaDepartamentoForm.CodigoDepartamentoSeleccionada
+            End If
+        End Using
+    End Sub
+    ''Municipios
+    Private Sub TextBox11_TextChanged(sender As Object, e As EventArgs) Handles TextBox11.TextChanged
+        If TextBox11.Text.Length = 2 Then
+            If conexion.State = ConnectionState.Closed Then
+                conexion.Open()
+            End If
+            Try
+                Dim terminoBusqueda As String = TextBox9.Text.Trim() & TextBox11.Text.Trim()
+                Dim consulta As String = "SELECT * FROM Ciudades WHERE Codigo = @Codigo"
+                Using comando As New SqlCommand(consulta, conexion)
+                    comando.Parameters.AddWithValue("@Codigo", terminoBusqueda)
+                    Using adaptador As New SqlDataAdapter(comando)
+                        Dim conjuntoDatos As New DataSet()
+                        adaptador.Fill(conjuntoDatos, "Codigo")
+                        If conjuntoDatos.Tables("Codigo").Rows.Count > 0 Then
+                            Dim fila As DataRow = conjuntoDatos.Tables("Codigo").Rows(0)
+                            TextBox10.Text = fila("Nombre").ToString()
+                        Else
+                            MessageBox.Show("No se encontró el Municipio especificado.", "No Existe", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        End If
+                    End Using
+                End Using
+            Catch ex As Exception
+                MessageBox.Show("Error al buscar el Municipio: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+        End If
+    End Sub
+    Private Sub TextBox11_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox11.KeyDown
+        If e.KeyCode = Keys.F1 Then
+            e.Handled = True
+            e.SuppressKeyPress = True
+            MostrarListaCiudades()
+        End If
+    End Sub
+    Private Sub MostrarListaCiudades()
+        Using listaCiudadesForm As New frmListaCiudades()
+            If listaCiudadesForm.ShowDialog() = DialogResult.OK Then
+                TextBox11.Text = listaCiudadesForm.CodigoCiudadesSeleccionada
+            End If
+        End Using
+    End Sub
+    ''Guardar 
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        MostrarCantidadFilas()
+        conect()
+        If conexion.State = ConnectionState.Closed Then
+            conexion.Open()
+        End If
+        Try
+            Dim consulta As String = "INSERT INTO clientes (IDCliente,	Nombre,	Direccion,	Departamento,	Ciudad,	Telefono,	Sexo,	Fecha,	fechatramite,	Id,	profecion,	ocupacion,	barrio,	observacion,	codigo_departamento,	codigo_municipio,	codigo_profecion,	codigo_ocupacion) VALUES (@IDCliente,	@Nombre,	@Direccion,	@Departamento,	@Ciudad,	@Telefono,	@Sexo,	@Fecha,	GETDATE(),	@Id,	@profecion,	@ocupacion,	@barrio,	@observacion,	@codigo_departamento,	@codigo_municipio,	@codigo_profecion,	@codigo_ocupacion)"
+            Dim comando As New SqlCommand(consulta, conexion)
+            comando.Parameters.AddWithValue("@IDCliente", TextBox1.Text)
+            comando.Parameters.AddWithValue("@Nombre", TextBox2.Text)
+            comando.Parameters.AddWithValue("@Direccion", TextBox13.Text)
+            comando.Parameters.AddWithValue("@Departamento", TextBox8.Text)
+            comando.Parameters.AddWithValue("@Ciudad", TextBox10.Text)
+            comando.Parameters.AddWithValue("@Telefono", TextBox14.Text)
+            comando.Parameters.AddWithValue("@Sexo", sexo)
+            comando.Parameters.AddWithValue("@Fecha", MaskedTextBox4.Text)
+            comando.Parameters.AddWithValue("@Id", TextBox6.Text)
+            comando.Parameters.AddWithValue("@profecion", TextBox5.Text)
+            comando.Parameters.AddWithValue("@ocupacion", TextBox6.Text)
+            comando.Parameters.AddWithValue("@barrio", TextBox12.Text)
+            comando.Parameters.AddWithValue("@observacion", TextBox15.Text)
+            comando.Parameters.AddWithValue("@codigo_departamento", TextBox9.Text)
+            comando.Parameters.AddWithValue("@codigo_municipio", TextBox11.Text)
+            comando.Parameters.AddWithValue("@codigo_profecion", TextBox4.Text)
+            comando.Parameters.AddWithValue("@codigo_ocupacion", TextBox7.Text)
+            comando.ExecuteNonQuery()
+            Button7.Enabled = True
 
+            Dim consulta2 As String = "INSERT INTO referencias (IDCliente,	R1Nombre,	R1Parentesco,	R1Direccion,	R1Numero,	R2Nombre,	R2Parentesco,	R2Direccion,	R2Numero) VALUES (@IDCliente,	@R1Nombre,	@R1Parentesco,	@R1Direccion,	@R1Numero,	@R2Nombre,	@R2Parentesco,	@R2Direccion,	@R2Numero)"
+            Dim comando2 As New SqlCommand(consulta2, conexion)
+            comando2.Parameters.AddWithValue("@IDCliente", TextBox1.Text)
+            comando2.Parameters.AddWithValue("@R1Nombre", TextBox32.Text)
+            comando2.Parameters.AddWithValue("@R1Parentesco", TextBox30.Text)
+            comando2.Parameters.AddWithValue("@R1Direccion", TextBox29.Text)
+            comando2.Parameters.AddWithValue("@R1Numero", TextBox28.Text)
+            comando2.Parameters.AddWithValue("@R2Nombre", TextBox33.Text)
+            comando2.Parameters.AddWithValue("@R2Parentesco", TextBox31.Text)
+            comando2.Parameters.AddWithValue("@R2Direccion", TextBox27.Text)
+            comando2.Parameters.AddWithValue("@R2Numero", TextBox24.Text)
+            comando2.ExecuteNonQuery()
+        Catch ex As Exception
+        Finally
+            conexion.Close()
+        End Try
+        DeshabilitarCampos()
+        Button9.Enabled = True
+        Button8.Enabled = True
+    End Sub
+    ''Editar
     Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
         Dim terminoBusqueda As String = TextBox1.Text.Trim()
         If Not String.IsNullOrEmpty(terminoBusqueda) Then
@@ -319,61 +444,55 @@ Public Class frmNuevoTramite
         Button9.Enabled = True
         Button8.Enabled = True
     End Sub
-    Private Sub TextBox4_TextChanged(sender As Object, e As EventArgs) Handles TextBox4.TextChanged
-        If TextBox4.Text.Length = 3 Then
-            If conexion.State = ConnectionState.Closed Then
-                conexion.Open()
+    Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
+        HabilitarCampos()
+        Button9.Enabled = False
+        Button8.Enabled = False
+    End Sub
+    ''Borrar
+    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
+        Dim terminoBusqueda As String = TextBox1.Text.Trim()
+        If Not String.IsNullOrEmpty(terminoBusqueda) Then
+            Dim respuesta As DialogResult = MessageBox.Show("¿Está seguro de que desea eliminar el registro?", "Confirmar Eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+            If respuesta = DialogResult.Yes Then
+                Try
+                    conect()
+                    If conexion.State = ConnectionState.Closed Then
+                        conexion.Open()
+                    End If
+                    Dim consulta As String = "DELETE FROM Clientes WHERE IDCliente = @IDCliente"
+                    Dim comando As New SqlCommand(consulta, conexion)
+                    comando.Parameters.AddWithValue("@IDCliente", terminoBusqueda)
+                    comando.ExecuteNonQuery()
+                    MessageBox.Show("Registro eliminado exitosamente.", "Eliminado", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    Limpiarcampos()
+                    Button9.Enabled = False
+                    Button8.Enabled = False
+                    TextBox1.Clear()
+                    TextBox1.Focus()
+                    Button11.Enabled = False
+                Catch ex As Exception
+                    MessageBox.Show("Error al intentar eliminar el Registro: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Finally
+                    conexion.Close()
+                End Try
             End If
-            Try
-                Dim terminoBusqueda As String = TextBox4.Text.Trim()
-                Dim consulta As String = "SELECT * FROM Profeciones WHERE Codigo = @Codigo"
-                Using comando As New SqlCommand(consulta, conexion)
-                    comando.Parameters.AddWithValue("@Codigo", terminoBusqueda)
-                    Using adaptador As New SqlDataAdapter(comando)
-                        Dim conjuntoDatos As New DataSet()
-                        adaptador.Fill(conjuntoDatos, "Codigo")
-                        If conjuntoDatos.Tables("Codigo").Rows.Count > 0 Then
-                            Dim fila As DataRow = conjuntoDatos.Tables("Codigo").Rows(0)
-                            TextBox5.Text = fila("Nombre").ToString()
-                        Else
-                            MessageBox.Show("No se encontró la Profesión especificada.", "No Existe", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                        End If
-                    End Using
-                End Using
-            Catch ex As Exception
-                MessageBox.Show("Error al buscar la Profesión: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            End Try
+        Else
+            MessageBox.Show("Por favor, ingrese un Codigo Valido.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning)
         End If
+
     End Sub
-    Private Sub TextBox7_TextChanged(sender As Object, e As EventArgs) Handles TextBox7.TextChanged
-        If TextBox7.Text.Length = 3 Then
-            If conexion.State = ConnectionState.Closed Then
-                conexion.Open()
-            End If
-            Try
-                Dim terminoBusqueda As String = TextBox7.Text.Trim()
-                Dim consulta As String = "SELECT * FROM Ocupaciones WHERE Codigo = @Codigo"
-                Using comando As New SqlCommand(consulta, conexion)
-                    comando.Parameters.AddWithValue("@Codigo", terminoBusqueda)
-                    Using adaptador As New SqlDataAdapter(comando)
-                        Dim conjuntoDatos As New DataSet()
-                        adaptador.Fill(conjuntoDatos, "Codigo")
-                        If conjuntoDatos.Tables("Codigo").Rows.Count > 0 Then
-                            Dim fila As DataRow = conjuntoDatos.Tables("Codigo").Rows(0)
-                            TextBox6.Text = fila("Nombre").ToString()
-                        Else
-                            MessageBox.Show("No se encontró la Ocupación especificada.", "No Existe", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                        End If
-                    End Using
-                End Using
-            Catch ex As Exception
-                MessageBox.Show("Error al buscar la Ocupación: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            End Try
-        End If
+    Private Sub Button11_Click(sender As Object, e As EventArgs) Handles Button11.Click
+        frmImprimirDatosCliente.Show()
     End Sub
-    Private Sub Button12_Click(sender As Object, e As EventArgs) Handles Button12.Click
-        actualizarDataGrid()
+    Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click
+        Me.Close()
     End Sub
+
+
+
+
+    ''Plan de pago
     Private Function CalcCuotaMensual(monto As Decimal, tasaInteres As Decimal, plazo As Integer) As Decimal
         Dim cuotaMensual As Decimal
         cuotaMensual = monto * (tasaInteres / (1 - (1 + tasaInteres) ^ -plazo))
@@ -397,9 +516,9 @@ Public Class frmNuevoTramite
             dias = 15
             plazo = Val(TextBox20.Text) * 2
         ElseIf RadioButton3.Checked = True Then
-            tasaInteres = ((Val(TextBox19.Text) / 12) / 4.25) / 100
+            tasaInteres = ((Val(TextBox19.Text) / 12) / 4.33) / 100
             dias = 7
-            plazo = Val(TextBox20.Text) * 4.25
+            plazo = Val(TextBox20.Text) * 4.33
         End If
         cuotaMensual = CalcCuotaMensual(monto, tasaInteres, plazo)
         Dim saldo As Decimal = monto
@@ -427,6 +546,7 @@ Public Class frmNuevoTramite
         TextBox23.Text = sumaCapital.ToString("0.00")
         TextBox25.Text = sumaInteres.ToString("0.00")
         TextBox26.Text = sumaCuotas.ToString("0.00")
+        TextBox22.Text = cuotaMensual.ToString("0.00")
     End Sub
     Private Sub fechaPrimerPago()
         Dim PrimerPago As DateTime
@@ -443,17 +563,20 @@ Public Class frmNuevoTramite
             MessageBox.Show("La fecha ingresada en MaskedTextBox2 no es válida.")
         End If
     End Sub
-
+    ''calculo del saldo que se financiara
     Private Sub TextBox16_TextChanged(sender As Object, e As EventArgs) Handles TextBox16.TextChanged
         calcularSaldoAFinanciar()
     End Sub
     Private Sub TextBox17_TextChanged(sender As Object, e As EventArgs) Handles TextBox17.TextChanged
         calcularSaldoAFinanciar()
     End Sub
-    Private Sub calcularSaldoAFinanciar()
-        TextBox18.Text = Val(TextBox16.Text) - Val(TextBox17.Text)
+    Private Sub TextBox21_TextChanged(sender As Object, e As EventArgs) Handles TextBox21.TextChanged
+        calcularSaldoAFinanciar()
     End Sub
-
+    Private Sub calcularSaldoAFinanciar()
+        TextBox18.Text = Val(TextBox16.Text) - Val(TextBox17.Text) + Val(TextBox21.Text)
+    End Sub
+    ''llenado del datagrid cada vez que se medifique un textbox
     Private Sub TextBox16_LostFocus(sender As Object, e As EventArgs) Handles TextBox16.LostFocus
         actualizarDataGrid()
     End Sub
@@ -481,72 +604,7 @@ Public Class frmNuevoTramite
     Private Sub RadioButton3_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton3.CheckedChanged
         actualizarDataGrid()
     End Sub
-
-    Private Sub frmNuevoTramite_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
-        If conexion IsNot Nothing AndAlso conexion.State = ConnectionState.Open Then
-            conexion.Close()
-        End If
-    End Sub
-    Private Sub TextBox7_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox7.KeyDown
-        If e.KeyCode = Keys.F1 Then
-            e.Handled = True
-            e.SuppressKeyPress = True
-            MostrarListaOcupaciones()
-        End If
-    End Sub
-    Private Sub MostrarListaOcupaciones()
-        Using listaOcupacionesForm As New frmListaOcupaciones()
-            If listaOcupacionesForm.ShowDialog() = DialogResult.OK Then
-                TextBox7.Text = listaOcupacionesForm.CodigoOcupacionSeleccionada
-            End If
-        End Using
-    End Sub
-
-    Private Sub TextBox4_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox4.KeyDown
-        If e.KeyCode = Keys.F1 Then
-            e.Handled = True
-            e.SuppressKeyPress = True
-            MostrarListaProfeciones()
-        End If
-    End Sub
-    Private Sub MostrarListaProfeciones()
-        Using listaProfecionesForm As New frmListaProfeciones()
-            If listaProfecionesForm.ShowDialog() = DialogResult.OK Then
-                TextBox4.Text = listaProfecionesForm.CodigoProfecionSeleccionada
-            End If
-        End Using
-    End Sub
-    Private Sub TextBox9_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox9.KeyDown
-        If e.KeyCode = Keys.F1 Then
-            e.Handled = True
-            e.SuppressKeyPress = True
-            MostrarListaDepartamentos()
-        End If
-    End Sub
-    Private Sub MostrarListaDepartamentos()
-        Using listaDepartamentoForm As New frmListaDepartamento()
-            If listaDepartamentoForm.ShowDialog() = DialogResult.OK Then
-                TextBox9.Text = listaDepartamentoForm.CodigoDepartamentoSeleccionada
-            End If
-        End Using
-    End Sub
-    Private Sub TextBox11_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox11.KeyDown
-        If e.KeyCode = Keys.F1 Then
-            e.Handled = True
-            e.SuppressKeyPress = True
-            MostrarListaCiudades()
-        End If
-    End Sub
-    Private Sub MostrarListaCiudades()
-        Using listaCiudadesForm As New frmListaCiudades()
-            If listaCiudadesForm.ShowDialog() = DialogResult.OK Then
-                TextBox11.Text = listaCiudadesForm.CodigoCiudadesSeleccionada
-            End If
-        End Using
-    End Sub
-
-    Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
-        HabilitarCampos()
-        Button9.Enabled = False
+    Private Sub Button5_Click(sender As Object, e As EventArgs)
+        Me.Close()
     End Sub
 End Class

@@ -115,6 +115,12 @@
     <Compile Include="frmEstadoDeCuenta.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmImprimirDatosCliente.Designer.vb">
+      <DependentUpon>frmImprimirDatosCliente.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmImprimirDatosCliente.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmListaCiudades.Designer.vb">
       <DependentUpon>frmListaCiudades.vb</DependentUpon>
     </Compile>
@@ -192,6 +198,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmEstadoDeCuenta.resx">
       <DependentUpon>frmEstadoDeCuenta.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmImprimirDatosCliente.resx">
+      <DependentUpon>frmImprimirDatosCliente.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmListaCiudades.resx">
       <DependentUpon>frmListaCiudades.vb</DependentUpon>

@@ -35,11 +35,10 @@ Partial Class frmNuevoTramite
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.TextBox22 = New System.Windows.Forms.TextBox()
         Me.TextBox21 = New System.Windows.Forms.TextBox()
+        Me.Label23 = New System.Windows.Forms.Label()
         Me.TextBox3 = New System.Windows.Forms.TextBox()
-        Me.Button12 = New System.Windows.Forms.Button()
-        Me.Panel7 = New System.Windows.Forms.Panel()
-        Me.Button5 = New System.Windows.Forms.Button()
         Me.Button6 = New System.Windows.Forms.Button()
         Me.MaskedTextBox3 = New System.Windows.Forms.MaskedTextBox()
         Me.MaskedTextBox2 = New System.Windows.Forms.MaskedTextBox()
@@ -51,10 +50,6 @@ Partial Class frmNuevoTramite
         Me.TextBox18 = New System.Windows.Forms.TextBox()
         Me.TextBox17 = New System.Windows.Forms.TextBox()
         Me.TextBox16 = New System.Windows.Forms.TextBox()
-        Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
-        Me.Button4 = New System.Windows.Forms.Button()
         Me.Label22 = New System.Windows.Forms.Label()
         Me.Label21 = New System.Windows.Forms.Label()
         Me.Label20 = New System.Windows.Forms.Label()
@@ -111,10 +106,29 @@ Partial Class frmNuevoTramite
         Me.MaskedTextBox1 = New System.Windows.Forms.MaskedTextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.Panel8 = New System.Windows.Forms.Panel()
+        Me.Label34 = New System.Windows.Forms.Label()
+        Me.Label33 = New System.Windows.Forms.Label()
+        Me.TextBox24 = New System.Windows.Forms.TextBox()
+        Me.Label24 = New System.Windows.Forms.Label()
+        Me.TextBox27 = New System.Windows.Forms.TextBox()
+        Me.Label25 = New System.Windows.Forms.Label()
+        Me.TextBox31 = New System.Windows.Forms.TextBox()
+        Me.Label31 = New System.Windows.Forms.Label()
+        Me.TextBox33 = New System.Windows.Forms.TextBox()
+        Me.Label32 = New System.Windows.Forms.Label()
+        Me.Label30 = New System.Windows.Forms.Label()
+        Me.TextBox28 = New System.Windows.Forms.TextBox()
+        Me.Label26 = New System.Windows.Forms.Label()
+        Me.TextBox29 = New System.Windows.Forms.TextBox()
+        Me.Label27 = New System.Windows.Forms.Label()
+        Me.TextBox30 = New System.Windows.Forms.TextBox()
+        Me.Label28 = New System.Windows.Forms.Label()
+        Me.TextBox32 = New System.Windows.Forms.TextBox()
+        Me.Label29 = New System.Windows.Forms.Label()
         Me.MaskedTextBox4 = New System.Windows.Forms.MaskedTextBox()
         Me.TabPage2.SuspendLayout()
-        Me.Panel7.SuspendLayout()
-        Me.Panel3.SuspendLayout()
         Me.Panel6.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage1.SuspendLayout()
@@ -123,6 +137,8 @@ Partial Class frmNuevoTramite
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
+        Me.TabPage3.SuspendLayout()
+        Me.Panel8.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label1
@@ -207,10 +223,11 @@ Partial Class frmNuevoTramite
         '
         'TabPage2
         '
+        Me.TabPage2.Controls.Add(Me.Button6)
+        Me.TabPage2.Controls.Add(Me.TextBox22)
         Me.TabPage2.Controls.Add(Me.TextBox21)
+        Me.TabPage2.Controls.Add(Me.Label23)
         Me.TabPage2.Controls.Add(Me.TextBox3)
-        Me.TabPage2.Controls.Add(Me.Button12)
-        Me.TabPage2.Controls.Add(Me.Panel7)
         Me.TabPage2.Controls.Add(Me.MaskedTextBox3)
         Me.TabPage2.Controls.Add(Me.MaskedTextBox2)
         Me.TabPage2.Controls.Add(Me.TextBox26)
@@ -221,7 +238,6 @@ Partial Class frmNuevoTramite
         Me.TabPage2.Controls.Add(Me.TextBox18)
         Me.TabPage2.Controls.Add(Me.TextBox17)
         Me.TabPage2.Controls.Add(Me.TextBox16)
-        Me.TabPage2.Controls.Add(Me.Panel3)
         Me.TabPage2.Controls.Add(Me.Label22)
         Me.TabPage2.Controls.Add(Me.Label21)
         Me.TabPage2.Controls.Add(Me.Label20)
@@ -231,74 +247,68 @@ Partial Class frmNuevoTramite
         Me.TabPage2.Controls.Add(Me.Label16)
         Me.TabPage2.Controls.Add(Me.Panel6)
         Me.TabPage2.Controls.Add(Me.DataGridView1)
-        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage2.Location = New System.Drawing.Point(4, 28)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(668, 344)
+        Me.TabPage2.Size = New System.Drawing.Size(668, 338)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Plan de Pago"
         Me.TabPage2.UseVisualStyleBackColor = True
         '
+        'TextBox22
+        '
+        Me.TextBox22.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TextBox22.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.TextBox22.Font = New System.Drawing.Font("Agency FB", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox22.Location = New System.Drawing.Point(615, 315)
+        Me.TextBox22.MaxLength = 4
+        Me.TextBox22.Name = "TextBox22"
+        Me.TextBox22.Size = New System.Drawing.Size(22, 21)
+        Me.TextBox22.TabIndex = 67
+        Me.TextBox22.Visible = False
+        '
         'TextBox21
         '
         Me.TextBox21.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TextBox21.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.TextBox21.Font = New System.Drawing.Font("Agency FB", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox21.Location = New System.Drawing.Point(639, 318)
-        Me.TextBox21.MaxLength = 4
+        Me.TextBox21.Font = New System.Drawing.Font("Agency FB", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox21.Location = New System.Drawing.Point(100, 90)
         Me.TextBox21.Name = "TextBox21"
-        Me.TextBox21.Size = New System.Drawing.Size(10, 21)
-        Me.TextBox21.TabIndex = 65
+        Me.TextBox21.Size = New System.Drawing.Size(80, 26)
+        Me.TextBox21.TabIndex = 66
+        Me.TextBox21.Text = "0.00"
+        Me.TextBox21.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label23
+        '
+        Me.Label23.AutoSize = True
+        Me.Label23.BackColor = System.Drawing.Color.Transparent
+        Me.Label23.Font = New System.Drawing.Font("Agency FB", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label23.ForeColor = System.Drawing.Color.Black
+        Me.Label23.Location = New System.Drawing.Point(3, 92)
+        Me.Label23.Name = "Label23"
+        Me.Label23.Size = New System.Drawing.Size(49, 20)
+        Me.Label23.TabIndex = 65
+        Me.Label23.Text = "Papeleria"
         '
         'TextBox3
         '
         Me.TextBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.TextBox3.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.TextBox3.Font = New System.Drawing.Font("Agency FB", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox3.Location = New System.Drawing.Point(655, 318)
+        Me.TextBox3.Location = New System.Drawing.Point(643, 315)
         Me.TextBox3.MaxLength = 4
         Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(10, 21)
+        Me.TextBox3.Size = New System.Drawing.Size(22, 21)
         Me.TextBox3.TabIndex = 64
-        '
-        'Button12
-        '
-        Me.Button12.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.Button12.ForeColor = System.Drawing.Color.Black
-        Me.Button12.Location = New System.Drawing.Point(186, 305)
-        Me.Button12.Name = "Button12"
-        Me.Button12.Size = New System.Drawing.Size(60, 30)
-        Me.Button12.TabIndex = 26
-        Me.Button12.Text = "Calcular"
-        Me.Button12.UseVisualStyleBackColor = True
-        '
-        'Panel7
-        '
-        Me.Panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel7.Controls.Add(Me.Button5)
-        Me.Panel7.Controls.Add(Me.Button6)
-        Me.Panel7.Location = New System.Drawing.Point(109, 302)
-        Me.Panel7.Name = "Panel7"
-        Me.Panel7.Size = New System.Drawing.Size(69, 36)
-        Me.Panel7.TabIndex = 63
-        '
-        'Button5
-        '
-        Me.Button5.BackgroundImage = CType(resources.GetObject("Button5.BackgroundImage"), System.Drawing.Image)
-        Me.Button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.Button5.Location = New System.Drawing.Point(34, 2)
-        Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(30, 30)
-        Me.Button5.TabIndex = 25
-        Me.Button5.UseVisualStyleBackColor = True
+        Me.TextBox3.Visible = False
         '
         'Button6
         '
         Me.Button6.BackgroundImage = CType(resources.GetObject("Button6.BackgroundImage"), System.Drawing.Image)
         Me.Button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.Button6.Location = New System.Drawing.Point(2, 2)
+        Me.Button6.Location = New System.Drawing.Point(49, 287)
         Me.Button6.Name = "Button6"
-        Me.Button6.Size = New System.Drawing.Size(30, 30)
+        Me.Button6.Size = New System.Drawing.Size(40, 40)
         Me.Button6.TabIndex = 19
         Me.Button6.UseVisualStyleBackColor = True
         '
@@ -306,7 +316,7 @@ Partial Class frmNuevoTramite
         '
         Me.MaskedTextBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.MaskedTextBox3.Font = New System.Drawing.Font("Agency FB", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.MaskedTextBox3.Location = New System.Drawing.Point(100, 254)
+        Me.MaskedTextBox3.Location = New System.Drawing.Point(100, 245)
         Me.MaskedTextBox3.Mask = "00/00/0000"
         Me.MaskedTextBox3.Name = "MaskedTextBox3"
         Me.MaskedTextBox3.Size = New System.Drawing.Size(80, 26)
@@ -318,7 +328,7 @@ Partial Class frmNuevoTramite
         '
         Me.MaskedTextBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.MaskedTextBox2.Font = New System.Drawing.Font("Agency FB", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.MaskedTextBox2.Location = New System.Drawing.Point(100, 215)
+        Me.MaskedTextBox2.Location = New System.Drawing.Point(100, 214)
         Me.MaskedTextBox2.Mask = "00/00/0000"
         Me.MaskedTextBox2.Name = "MaskedTextBox2"
         Me.MaskedTextBox2.Size = New System.Drawing.Size(80, 26)
@@ -366,7 +376,7 @@ Partial Class frmNuevoTramite
         '
         Me.TextBox20.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.TextBox20.Font = New System.Drawing.Font("Agency FB", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox20.Location = New System.Drawing.Point(100, 177)
+        Me.TextBox20.Location = New System.Drawing.Point(100, 183)
         Me.TextBox20.Name = "TextBox20"
         Me.TextBox20.Size = New System.Drawing.Size(80, 26)
         Me.TextBox20.TabIndex = 21
@@ -377,7 +387,7 @@ Partial Class frmNuevoTramite
         '
         Me.TextBox19.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.TextBox19.Font = New System.Drawing.Font("Agency FB", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox19.Location = New System.Drawing.Point(100, 139)
+        Me.TextBox19.Location = New System.Drawing.Point(100, 152)
         Me.TextBox19.Name = "TextBox19"
         Me.TextBox19.Size = New System.Drawing.Size(80, 26)
         Me.TextBox19.TabIndex = 20
@@ -388,7 +398,7 @@ Partial Class frmNuevoTramite
         '
         Me.TextBox18.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.TextBox18.Font = New System.Drawing.Font("Agency FB", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox18.Location = New System.Drawing.Point(100, 101)
+        Me.TextBox18.Location = New System.Drawing.Point(100, 121)
         Me.TextBox18.Name = "TextBox18"
         Me.TextBox18.ReadOnly = True
         Me.TextBox18.Size = New System.Drawing.Size(80, 26)
@@ -400,7 +410,7 @@ Partial Class frmNuevoTramite
         '
         Me.TextBox17.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.TextBox17.Font = New System.Drawing.Font("Agency FB", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox17.Location = New System.Drawing.Point(100, 64)
+        Me.TextBox17.Location = New System.Drawing.Point(100, 59)
         Me.TextBox17.Name = "TextBox17"
         Me.TextBox17.Size = New System.Drawing.Size(80, 26)
         Me.TextBox17.TabIndex = 18
@@ -418,54 +428,13 @@ Partial Class frmNuevoTramite
         Me.TextBox16.Text = "0.00"
         Me.TextBox16.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'Panel3
-        '
-        Me.Panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel3.Controls.Add(Me.Button1)
-        Me.Panel3.Controls.Add(Me.Button3)
-        Me.Panel3.Controls.Add(Me.Button4)
-        Me.Panel3.Location = New System.Drawing.Point(6, 302)
-        Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(100, 36)
-        Me.Panel3.TabIndex = 56
-        '
-        'Button1
-        '
-        Me.Button1.BackgroundImage = CType(resources.GetObject("Button1.BackgroundImage"), System.Drawing.Image)
-        Me.Button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.Button1.Location = New System.Drawing.Point(66, 2)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(30, 30)
-        Me.Button1.TabIndex = 17
-        Me.Button1.UseVisualStyleBackColor = True
-        '
-        'Button3
-        '
-        Me.Button3.BackgroundImage = CType(resources.GetObject("Button3.BackgroundImage"), System.Drawing.Image)
-        Me.Button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.Button3.Location = New System.Drawing.Point(34, 2)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(30, 30)
-        Me.Button3.TabIndex = 24
-        Me.Button3.UseVisualStyleBackColor = True
-        '
-        'Button4
-        '
-        Me.Button4.BackgroundImage = CType(resources.GetObject("Button4.BackgroundImage"), System.Drawing.Image)
-        Me.Button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.Button4.Location = New System.Drawing.Point(2, 2)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(30, 30)
-        Me.Button4.TabIndex = 18
-        Me.Button4.UseVisualStyleBackColor = True
-        '
         'Label22
         '
         Me.Label22.AutoSize = True
         Me.Label22.BackColor = System.Drawing.Color.Transparent
         Me.Label22.Font = New System.Drawing.Font("Agency FB", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label22.ForeColor = System.Drawing.Color.Black
-        Me.Label22.Location = New System.Drawing.Point(1, 256)
+        Me.Label22.Location = New System.Drawing.Point(1, 247)
         Me.Label22.Name = "Label22"
         Me.Label22.Size = New System.Drawing.Size(92, 20)
         Me.Label22.TabIndex = 29
@@ -477,7 +446,7 @@ Partial Class frmNuevoTramite
         Me.Label21.BackColor = System.Drawing.Color.Transparent
         Me.Label21.Font = New System.Drawing.Font("Agency FB", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label21.ForeColor = System.Drawing.Color.Black
-        Me.Label21.Location = New System.Drawing.Point(3, 217)
+        Me.Label21.Location = New System.Drawing.Point(3, 216)
         Me.Label21.Name = "Label21"
         Me.Label21.Size = New System.Drawing.Size(86, 20)
         Me.Label21.TabIndex = 28
@@ -489,7 +458,7 @@ Partial Class frmNuevoTramite
         Me.Label20.BackColor = System.Drawing.Color.Transparent
         Me.Label20.Font = New System.Drawing.Font("Agency FB", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label20.ForeColor = System.Drawing.Color.Black
-        Me.Label20.Location = New System.Drawing.Point(3, 179)
+        Me.Label20.Location = New System.Drawing.Point(3, 185)
         Me.Label20.Name = "Label20"
         Me.Label20.Size = New System.Drawing.Size(84, 20)
         Me.Label20.TabIndex = 27
@@ -501,7 +470,7 @@ Partial Class frmNuevoTramite
         Me.Label19.BackColor = System.Drawing.Color.Transparent
         Me.Label19.Font = New System.Drawing.Font("Agency FB", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label19.ForeColor = System.Drawing.Color.Black
-        Me.Label19.Location = New System.Drawing.Point(3, 141)
+        Me.Label19.Location = New System.Drawing.Point(3, 154)
         Me.Label19.Name = "Label19"
         Me.Label19.Size = New System.Drawing.Size(46, 20)
         Me.Label19.TabIndex = 26
@@ -513,7 +482,7 @@ Partial Class frmNuevoTramite
         Me.Label18.BackColor = System.Drawing.Color.Transparent
         Me.Label18.Font = New System.Drawing.Font("Agency FB", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label18.ForeColor = System.Drawing.Color.Black
-        Me.Label18.Location = New System.Drawing.Point(3, 103)
+        Me.Label18.Location = New System.Drawing.Point(3, 123)
         Me.Label18.Name = "Label18"
         Me.Label18.Size = New System.Drawing.Size(79, 20)
         Me.Label18.TabIndex = 25
@@ -525,7 +494,7 @@ Partial Class frmNuevoTramite
         Me.Label17.BackColor = System.Drawing.Color.Transparent
         Me.Label17.Font = New System.Drawing.Font("Agency FB", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label17.ForeColor = System.Drawing.Color.Black
-        Me.Label17.Location = New System.Drawing.Point(3, 66)
+        Me.Label17.Location = New System.Drawing.Point(3, 61)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(35, 20)
         Me.Label17.TabIndex = 17
@@ -686,9 +655,7 @@ Partial Class frmNuevoTramite
         'TabPage1
         '
         Me.TabPage1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.TabPage1.Controls.Add(Me.Panel5)
         Me.TabPage1.Controls.Add(Me.Label9)
-        Me.TabPage1.Controls.Add(Me.Panel4)
         Me.TabPage1.Controls.Add(Me.TextBox6)
         Me.TabPage1.Controls.Add(Me.TextBox7)
         Me.TabPage1.Controls.Add(Me.TextBox5)
@@ -698,10 +665,10 @@ Partial Class frmNuevoTramite
         Me.TabPage1.Controls.Add(Me.Panel1)
         Me.TabPage1.Controls.Add(Me.MaskedTextBox1)
         Me.TabPage1.Controls.Add(Me.Label5)
-        Me.TabPage1.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage1.Location = New System.Drawing.Point(4, 28)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(668, 344)
+        Me.TabPage1.Size = New System.Drawing.Size(668, 338)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Datos del Cliente"
         Me.TabPage1.UseVisualStyleBackColor = True
@@ -711,7 +678,7 @@ Partial Class frmNuevoTramite
         Me.Panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel5.Controls.Add(Me.Button10)
         Me.Panel5.Controls.Add(Me.Button11)
-        Me.Panel5.Location = New System.Drawing.Point(353, 302)
+        Me.Panel5.Location = New System.Drawing.Point(364, 475)
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Size = New System.Drawing.Size(69, 36)
         Me.Panel5.TabIndex = 56
@@ -755,7 +722,7 @@ Partial Class frmNuevoTramite
         Me.Panel4.Controls.Add(Me.Button7)
         Me.Panel4.Controls.Add(Me.Button8)
         Me.Panel4.Controls.Add(Me.Button9)
-        Me.Panel4.Location = New System.Drawing.Point(248, 302)
+        Me.Panel4.Location = New System.Drawing.Point(261, 475)
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(100, 36)
         Me.Panel4.TabIndex = 55
@@ -904,7 +871,7 @@ Partial Class frmNuevoTramite
         Me.TextBox14.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.TextBox14.Font = New System.Drawing.Font("Agency FB", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox14.Location = New System.Drawing.Point(9, 151)
-        Me.TextBox14.MaxLength = 9
+        Me.TextBox14.MaxLength = 10
         Me.TextBox14.Name = "TextBox14"
         Me.TextBox14.Size = New System.Drawing.Size(125, 26)
         Me.TextBox14.TabIndex = 14
@@ -1128,11 +1095,270 @@ Partial Class frmNuevoTramite
         '
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage2)
-        Me.TabControl1.Location = New System.Drawing.Point(12, 104)
+        Me.TabControl1.Controls.Add(Me.TabPage3)
+        Me.TabControl1.Location = New System.Drawing.Point(12, 102)
+        Me.TabControl1.Multiline = True
         Me.TabControl1.Name = "TabControl1"
+        Me.TabControl1.Padding = New System.Drawing.Point(20, 6)
+        Me.TabControl1.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.TabControl1.SelectedIndex = 0
         Me.TabControl1.Size = New System.Drawing.Size(676, 370)
         Me.TabControl1.TabIndex = 26
+        '
+        'TabPage3
+        '
+        Me.TabPage3.Controls.Add(Me.Panel8)
+        Me.TabPage3.Location = New System.Drawing.Point(4, 28)
+        Me.TabPage3.Name = "TabPage3"
+        Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage3.Size = New System.Drawing.Size(668, 338)
+        Me.TabPage3.TabIndex = 2
+        Me.TabPage3.Text = "Referencias"
+        Me.TabPage3.UseVisualStyleBackColor = True
+        '
+        'Panel8
+        '
+        Me.Panel8.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.Panel8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel8.Controls.Add(Me.Label34)
+        Me.Panel8.Controls.Add(Me.Label33)
+        Me.Panel8.Controls.Add(Me.TextBox24)
+        Me.Panel8.Controls.Add(Me.Label24)
+        Me.Panel8.Controls.Add(Me.TextBox27)
+        Me.Panel8.Controls.Add(Me.Label25)
+        Me.Panel8.Controls.Add(Me.TextBox31)
+        Me.Panel8.Controls.Add(Me.Label31)
+        Me.Panel8.Controls.Add(Me.TextBox33)
+        Me.Panel8.Controls.Add(Me.Label32)
+        Me.Panel8.Controls.Add(Me.Label30)
+        Me.Panel8.Controls.Add(Me.TextBox28)
+        Me.Panel8.Controls.Add(Me.Label26)
+        Me.Panel8.Controls.Add(Me.TextBox29)
+        Me.Panel8.Controls.Add(Me.Label27)
+        Me.Panel8.Controls.Add(Me.TextBox30)
+        Me.Panel8.Controls.Add(Me.Label28)
+        Me.Panel8.Controls.Add(Me.TextBox32)
+        Me.Panel8.Controls.Add(Me.Label29)
+        Me.Panel8.Location = New System.Drawing.Point(44, 57)
+        Me.Panel8.Name = "Panel8"
+        Me.Panel8.Size = New System.Drawing.Size(581, 224)
+        Me.Panel8.TabIndex = 11
+        '
+        'Label34
+        '
+        Me.Label34.AutoSize = True
+        Me.Label34.BackColor = System.Drawing.Color.Transparent
+        Me.Label34.Font = New System.Drawing.Font("Agency FB", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label34.ForeColor = System.Drawing.Color.Black
+        Me.Label34.Location = New System.Drawing.Point(253, 28)
+        Me.Label34.Name = "Label34"
+        Me.Label34.Size = New System.Drawing.Size(70, 20)
+        Me.Label34.TabIndex = 37
+        Me.Label34.Text = "Referencia 1"
+        '
+        'Label33
+        '
+        Me.Label33.AutoSize = True
+        Me.Label33.BackColor = System.Drawing.Color.Transparent
+        Me.Label33.Font = New System.Drawing.Font("Agency FB", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label33.ForeColor = System.Drawing.Color.Black
+        Me.Label33.Location = New System.Drawing.Point(251, 120)
+        Me.Label33.Name = "Label33"
+        Me.Label33.Size = New System.Drawing.Size(73, 20)
+        Me.Label33.TabIndex = 36
+        Me.Label33.Text = "Referencia 2"
+        '
+        'TextBox24
+        '
+        Me.TextBox24.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TextBox24.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.TextBox24.Font = New System.Drawing.Font("Agency FB", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox24.Location = New System.Drawing.Point(461, 174)
+        Me.TextBox24.MaxLength = 100
+        Me.TextBox24.Name = "TextBox24"
+        Me.TextBox24.Size = New System.Drawing.Size(112, 26)
+        Me.TextBox24.TabIndex = 29
+        '
+        'Label24
+        '
+        Me.Label24.AutoSize = True
+        Me.Label24.BackColor = System.Drawing.Color.Transparent
+        Me.Label24.Font = New System.Drawing.Font("Agency FB", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label24.ForeColor = System.Drawing.Color.Black
+        Me.Label24.Location = New System.Drawing.Point(398, 177)
+        Me.Label24.Name = "Label24"
+        Me.Label24.Size = New System.Drawing.Size(59, 20)
+        Me.Label24.TabIndex = 35
+        Me.Label24.Text = "N. Telefono:"
+        '
+        'TextBox27
+        '
+        Me.TextBox27.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TextBox27.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.TextBox27.Font = New System.Drawing.Font("Agency FB", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox27.Location = New System.Drawing.Point(56, 174)
+        Me.TextBox27.MaxLength = 50
+        Me.TextBox27.Name = "TextBox27"
+        Me.TextBox27.Size = New System.Drawing.Size(341, 26)
+        Me.TextBox27.TabIndex = 28
+        '
+        'Label25
+        '
+        Me.Label25.AutoSize = True
+        Me.Label25.BackColor = System.Drawing.Color.Transparent
+        Me.Label25.Font = New System.Drawing.Font("Agency FB", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label25.ForeColor = System.Drawing.Color.Black
+        Me.Label25.Location = New System.Drawing.Point(5, 177)
+        Me.Label25.Name = "Label25"
+        Me.Label25.Size = New System.Drawing.Size(52, 20)
+        Me.Label25.TabIndex = 34
+        Me.Label25.Text = "Direccion:"
+        '
+        'TextBox31
+        '
+        Me.TextBox31.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TextBox31.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.TextBox31.Font = New System.Drawing.Font("Agency FB", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox31.Location = New System.Drawing.Point(461, 143)
+        Me.TextBox31.Name = "TextBox31"
+        Me.TextBox31.Size = New System.Drawing.Size(112, 26)
+        Me.TextBox31.TabIndex = 33
+        '
+        'Label31
+        '
+        Me.Label31.AutoSize = True
+        Me.Label31.BackColor = System.Drawing.Color.Transparent
+        Me.Label31.Font = New System.Drawing.Font("Agency FB", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label31.ForeColor = System.Drawing.Color.Black
+        Me.Label31.Location = New System.Drawing.Point(398, 146)
+        Me.Label31.Name = "Label31"
+        Me.Label31.Size = New System.Drawing.Size(61, 20)
+        Me.Label31.TabIndex = 32
+        Me.Label31.Text = "Parentesco:"
+        '
+        'TextBox33
+        '
+        Me.TextBox33.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TextBox33.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.TextBox33.Font = New System.Drawing.Font("Agency FB", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox33.Location = New System.Drawing.Point(55, 143)
+        Me.TextBox33.Name = "TextBox33"
+        Me.TextBox33.Size = New System.Drawing.Size(342, 26)
+        Me.TextBox33.TabIndex = 31
+        '
+        'Label32
+        '
+        Me.Label32.AutoSize = True
+        Me.Label32.BackColor = System.Drawing.Color.Transparent
+        Me.Label32.Font = New System.Drawing.Font("Agency FB", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label32.ForeColor = System.Drawing.Color.Black
+        Me.Label32.Location = New System.Drawing.Point(5, 145)
+        Me.Label32.Name = "Label32"
+        Me.Label32.Size = New System.Drawing.Size(46, 20)
+        Me.Label32.TabIndex = 30
+        Me.Label32.Text = "Nombre:"
+        '
+        'Label30
+        '
+        Me.Label30.AutoSize = True
+        Me.Label30.BackColor = System.Drawing.Color.Transparent
+        Me.Label30.Font = New System.Drawing.Font("Agency FB", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label30.ForeColor = System.Drawing.Color.Black
+        Me.Label30.Location = New System.Drawing.Point(192, 3)
+        Me.Label30.Name = "Label30"
+        Me.Label30.Size = New System.Drawing.Size(194, 20)
+        Me.Label30.TabIndex = 27
+        Me.Label30.Text = "Referencias Familiares y Personales"
+        '
+        'TextBox28
+        '
+        Me.TextBox28.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TextBox28.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.TextBox28.Font = New System.Drawing.Font("Agency FB", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox28.Location = New System.Drawing.Point(460, 81)
+        Me.TextBox28.MaxLength = 100
+        Me.TextBox28.Name = "TextBox28"
+        Me.TextBox28.Size = New System.Drawing.Size(112, 26)
+        Me.TextBox28.TabIndex = 13
+        '
+        'Label26
+        '
+        Me.Label26.AutoSize = True
+        Me.Label26.BackColor = System.Drawing.Color.Transparent
+        Me.Label26.Font = New System.Drawing.Font("Agency FB", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label26.ForeColor = System.Drawing.Color.Black
+        Me.Label26.Location = New System.Drawing.Point(398, 84)
+        Me.Label26.Name = "Label26"
+        Me.Label26.Size = New System.Drawing.Size(59, 20)
+        Me.Label26.TabIndex = 22
+        Me.Label26.Text = "N. Telefono:"
+        '
+        'TextBox29
+        '
+        Me.TextBox29.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TextBox29.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.TextBox29.Font = New System.Drawing.Font("Agency FB", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox29.Location = New System.Drawing.Point(55, 81)
+        Me.TextBox29.MaxLength = 50
+        Me.TextBox29.Name = "TextBox29"
+        Me.TextBox29.Size = New System.Drawing.Size(341, 26)
+        Me.TextBox29.TabIndex = 12
+        '
+        'Label27
+        '
+        Me.Label27.AutoSize = True
+        Me.Label27.BackColor = System.Drawing.Color.Transparent
+        Me.Label27.Font = New System.Drawing.Font("Agency FB", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label27.ForeColor = System.Drawing.Color.Black
+        Me.Label27.Location = New System.Drawing.Point(5, 84)
+        Me.Label27.Name = "Label27"
+        Me.Label27.Size = New System.Drawing.Size(52, 20)
+        Me.Label27.TabIndex = 19
+        Me.Label27.Text = "Direccion:"
+        '
+        'TextBox30
+        '
+        Me.TextBox30.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TextBox30.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.TextBox30.Font = New System.Drawing.Font("Agency FB", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox30.Location = New System.Drawing.Point(460, 50)
+        Me.TextBox30.Name = "TextBox30"
+        Me.TextBox30.Size = New System.Drawing.Size(112, 26)
+        Me.TextBox30.TabIndex = 18
+        '
+        'Label28
+        '
+        Me.Label28.AutoSize = True
+        Me.Label28.BackColor = System.Drawing.Color.Transparent
+        Me.Label28.Font = New System.Drawing.Font("Agency FB", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label28.ForeColor = System.Drawing.Color.Black
+        Me.Label28.Location = New System.Drawing.Point(398, 53)
+        Me.Label28.Name = "Label28"
+        Me.Label28.Size = New System.Drawing.Size(61, 20)
+        Me.Label28.TabIndex = 16
+        Me.Label28.Text = "Parentesco:"
+        '
+        'TextBox32
+        '
+        Me.TextBox32.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TextBox32.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.TextBox32.Font = New System.Drawing.Font("Agency FB", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox32.Location = New System.Drawing.Point(55, 50)
+        Me.TextBox32.Name = "TextBox32"
+        Me.TextBox32.Size = New System.Drawing.Size(341, 26)
+        Me.TextBox32.TabIndex = 15
+        '
+        'Label29
+        '
+        Me.Label29.AutoSize = True
+        Me.Label29.BackColor = System.Drawing.Color.Transparent
+        Me.Label29.Font = New System.Drawing.Font("Agency FB", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label29.ForeColor = System.Drawing.Color.Black
+        Me.Label29.Location = New System.Drawing.Point(5, 53)
+        Me.Label29.Name = "Label29"
+        Me.Label29.Size = New System.Drawing.Size(46, 20)
+        Me.Label29.TabIndex = 13
+        Me.Label29.Text = "Nombre:"
         '
         'MaskedTextBox4
         '
@@ -1152,9 +1378,11 @@ Partial Class frmNuevoTramite
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.Gray
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.ClientSize = New System.Drawing.Size(700, 486)
+        Me.ClientSize = New System.Drawing.Size(700, 514)
+        Me.Controls.Add(Me.Panel5)
         Me.Controls.Add(Me.MaskedTextBox4)
         Me.Controls.Add(Me.TabControl1)
+        Me.Controls.Add(Me.Panel4)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label3)
@@ -1169,8 +1397,6 @@ Partial Class frmNuevoTramite
         Me.Text = "Nuevo Tramite"
         Me.TabPage2.ResumeLayout(False)
         Me.TabPage2.PerformLayout()
-        Me.Panel7.ResumeLayout(False)
-        Me.Panel3.ResumeLayout(False)
         Me.Panel6.ResumeLayout(False)
         Me.Panel6.PerformLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1183,6 +1409,9 @@ Partial Class frmNuevoTramite
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.TabControl1.ResumeLayout(False)
+        Me.TabPage3.ResumeLayout(False)
+        Me.Panel8.ResumeLayout(False)
+        Me.Panel8.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1196,8 +1425,6 @@ Partial Class frmNuevoTramite
     Friend WithEvents Label4 As Label
     Friend WithEvents Button2 As Button
     Friend WithEvents TabPage2 As TabPage
-    Friend WithEvents Panel7 As Panel
-    Friend WithEvents Button5 As Button
     Friend WithEvents Button6 As Button
     Friend WithEvents MaskedTextBox3 As MaskedTextBox
     Friend WithEvents MaskedTextBox2 As MaskedTextBox
@@ -1209,10 +1436,6 @@ Partial Class frmNuevoTramite
     Friend WithEvents TextBox18 As TextBox
     Friend WithEvents TextBox17 As TextBox
     Friend WithEvents TextBox16 As TextBox
-    Friend WithEvents Panel3 As Panel
-    Friend WithEvents Button1 As Button
-    Friend WithEvents Button3 As Button
-    Friend WithEvents Button4 As Button
     Friend WithEvents Label22 As Label
     Friend WithEvents Label21 As Label
     Friend WithEvents Label20 As Label
@@ -1263,7 +1486,6 @@ Partial Class frmNuevoTramite
     Friend WithEvents Label5 As Label
     Friend WithEvents TabControl1 As TabControl
     Friend WithEvents MaskedTextBox4 As MaskedTextBox
-    Friend WithEvents Button12 As Button
     Friend WithEvents Column1 As DataGridViewTextBoxColumn
     Friend WithEvents Column2 As DataGridViewTextBoxColumn
     Friend WithEvents Column3 As DataGridViewTextBoxColumn
@@ -1271,6 +1493,29 @@ Partial Class frmNuevoTramite
     Friend WithEvents Column6 As DataGridViewTextBoxColumn
     Friend WithEvents Column7 As DataGridViewTextBoxColumn
     Friend WithEvents Column8 As DataGridViewTextBoxColumn
-    Friend WithEvents TextBox21 As TextBox
     Friend WithEvents TextBox3 As TextBox
+    Friend WithEvents TextBox21 As TextBox
+    Friend WithEvents Label23 As Label
+    Friend WithEvents TextBox22 As TextBox
+    Friend WithEvents TabPage3 As TabPage
+    Friend WithEvents Panel8 As Panel
+    Friend WithEvents Label34 As Label
+    Friend WithEvents Label33 As Label
+    Friend WithEvents TextBox24 As TextBox
+    Friend WithEvents Label24 As Label
+    Friend WithEvents TextBox27 As TextBox
+    Friend WithEvents Label25 As Label
+    Friend WithEvents TextBox31 As TextBox
+    Friend WithEvents Label31 As Label
+    Friend WithEvents TextBox33 As TextBox
+    Friend WithEvents Label32 As Label
+    Friend WithEvents Label30 As Label
+    Friend WithEvents TextBox28 As TextBox
+    Friend WithEvents Label26 As Label
+    Friend WithEvents TextBox29 As TextBox
+    Friend WithEvents Label27 As Label
+    Friend WithEvents TextBox30 As TextBox
+    Friend WithEvents Label28 As Label
+    Friend WithEvents TextBox32 As TextBox
+    Friend WithEvents Label29 As Label
 End Class

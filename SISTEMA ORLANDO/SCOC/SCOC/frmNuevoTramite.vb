@@ -27,6 +27,7 @@ Public Class frmNuevoTramite
             sexo = "F"
         End If
         DeshabilitarCampos()
+        actualizarDataGrid()
     End Sub
     Private Sub frmNuevoTramite_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
         If conexion IsNot Nothing AndAlso conexion.State = ConnectionState.Open Then
@@ -49,10 +50,29 @@ Public Class frmNuevoTramite
         TextBox13.Enabled = True
         TextBox14.Enabled = True
         TextBox15.Enabled = True
+        TextBox28.Enabled = True
+        TextBox29.Enabled = True
+        TextBox30.Enabled = True
+        TextBox32.Enabled = True
+        TextBox24.Enabled = True
+        TextBox27.Enabled = True
+        TextBox31.Enabled = True
+        TextBox33.Enabled = True
         RadioButton1.Enabled = True
         RadioButton2.Enabled = True
         MaskedTextBox4.Enabled = True
         Button7.Enabled = True
+        TextBox16.Enabled = True
+        TextBox17.Enabled = True
+        TextBox18.Enabled = True
+        TextBox19.Enabled = True
+        TextBox20.Enabled = True
+        TextBox21.Enabled = True
+        TextBox23.Enabled = True
+        TextBox25.Enabled = True
+        TextBox26.Enabled = True
+        MaskedTextBox4.Enabled = True
+        MaskedTextBox2.Enabled = True
     End Sub
     Private Sub DeshabilitarCampos()
         TextBox2.Enabled = False
@@ -69,10 +89,29 @@ Public Class frmNuevoTramite
         TextBox13.Enabled = False
         TextBox14.Enabled = False
         TextBox15.Enabled = False
+        TextBox28.Enabled = False
+        TextBox29.Enabled = False
+        TextBox30.Enabled = False
+        TextBox32.Enabled = False
+        TextBox24.Enabled = False
+        TextBox27.Enabled = False
+        TextBox31.Enabled = False
+        TextBox33.Enabled = False
         RadioButton1.Enabled = False
         RadioButton2.Enabled = False
         MaskedTextBox4.Enabled = False
         Button7.Enabled = False
+        TextBox16.Enabled = False
+        TextBox17.Enabled = False
+        TextBox18.Enabled = False
+        TextBox19.Enabled = False
+        TextBox20.Enabled = False
+        TextBox21.Enabled = False
+        TextBox23.Enabled = False
+        TextBox25.Enabled = False
+        TextBox26.Enabled = False
+        MaskedTextBox4.Enabled = False
+        MaskedTextBox2.Enabled = False
     End Sub
     Private Sub Limpiarcampos()
         TextBox2.Clear()
@@ -90,18 +129,25 @@ Public Class frmNuevoTramite
         TextBox13.Clear()
         TextBox14.Clear()
         TextBox15.Clear()
-
-        TextBox16.Text = 0.00
-        TextBox17.Text = 0.00
-        TextBox18.Text = 0.00
-        TextBox19.Text = 0.00
-        TextBox20.Text = 0.00
-        TextBox21.Text = 0.00
-        TextBox23.Text = 0.00
-        TextBox25.Text = 0.00
-        TextBox26.Text = 0.00
-        MaskedTextBox2.Clear()
-        MaskedTextBox3.Clear()
+        TextBox28.Clear()
+        TextBox29.Clear()
+        TextBox30.Clear()
+        TextBox32.Clear()
+        TextBox24.Clear()
+        TextBox27.Clear()
+        TextBox31.Clear()
+        TextBox33.Clear()
+        TextBox16.Text = "0.00"
+        TextBox17.Text = "0.00"
+        TextBox18.Text = "0.00"
+        TextBox19.Text = "42.00"
+        TextBox20.Text = 12
+        TextBox21.Text = "0.00"
+        TextBox23.Text = "0.00"
+        TextBox25.Text = "0.00"
+        TextBox26.Text = "0.00"
+        MaskedTextBox4.Text = DateTime.Now.ToString("dd/MM/yyyy")
+        MaskedTextBox2.Text = DateTime.Now.ToString("dd/MM/yyyy")
     End Sub
     Private Sub MostrarCantidadFilas()
         If Not conexion.State = ConnectionState.Open Then
@@ -132,6 +178,7 @@ Public Class frmNuevoTramite
                 conexion.Open()
             End If
             Try
+                ''datos del cliente
                 Dim terminoBusqueda As String = TextBox1.Text.Trim()
                 Dim consulta As String = "SELECT * FROM Clientes WHERE IDCliente = @IDCliente"
                 Using comando As New SqlCommand(consulta, conexion)
@@ -161,6 +208,48 @@ Public Class frmNuevoTramite
                         TextBox7.Text = fila("codigo_ocupacion").ToString()
                         TextBox12.Text = fila("barrio").ToString()
                         TextBox15.Text = fila("observacion").ToString()
+
+                        ''referencias
+                        Dim consulta2 As String = "SELECT * FROM referencias WHERE IDCliente = @IDCliente"
+                        Using comando2 As New SqlCommand(consulta2, conexion)
+                            comando2.Parameters.AddWithValue("@IDCliente", terminoBusqueda)
+                            Dim adaptador2 As New SqlDataAdapter(comando2)
+                            Dim conjuntoDatos2 As New DataSet()
+                            adaptador2.Fill(conjuntoDatos2, "IDCliente")
+                            If conjuntoDatos2.Tables("IDCliente").Rows.Count > 0 Then
+                                Dim fila2 As DataRow = conjuntoDatos2.Tables("IDCliente").Rows(0)
+                                TextBox32.Text = fila2("R1Nombre").ToString()
+                                TextBox30.Text = fila2("R1Parentesco").ToString()
+                                TextBox29.Text = fila2("R1Direccion").ToString()
+                                TextBox28.Text = fila2("R1Numero").ToString()
+                                TextBox33.Text = fila2("R2Nombre").ToString()
+                                TextBox31.Text = fila2("R2Parentesco").ToString()
+                                TextBox27.Text = fila2("R2Direccion").ToString()
+                                TextBox24.Text = fila2("R2Numero").ToString()
+                            End If
+                        End Using
+
+                        ''plan de pago
+                        Dim consulta3 As String = "SELECT * FROM PlanesDePago WHERE IDCliente = @IDCliente"
+                        Using comando3 As New SqlCommand(consulta3, conexion)
+                            comando3.Parameters.AddWithValue("@IDCliente", terminoBusqueda)
+                            Dim adaptador3 As New SqlDataAdapter(comando3)
+                            Dim conjuntoDatos3 As New DataSet()
+                            adaptador3.Fill(conjuntoDatos3, "IDCliente")
+                            If conjuntoDatos3.Tables("IDCliente").Rows.Count > 0 Then
+                                Dim fila3 As DataRow = conjuntoDatos3.Tables("IDCliente").Rows(0)
+                                TextBox3.Text = fila3("IDPlanPago").ToString()
+                                TextBox21.Text = fila3("papeleria").ToString()
+                                TextBox22.Text = fila3("Cuota").ToString()
+                                MaskedTextBox2.Text = fila3("FechaDeDesembolso").ToString()
+                                TextBox18.Text = fila3("Monto").ToString()
+                                TextBox16.Text = fila3("MontoSolicitado").ToString()
+                                TextBox17.Text = fila3("Prima").ToString()
+                                TextBox19.Text = fila3("InteresAnual").ToString()
+                                MaskedTextBox3.Text = fila3("PrimerPago").ToString()
+                            End If
+                        End Using
+
                         Button2.Enabled = False
                         Button9.Enabled = True
                         Button8.Enabled = True
@@ -178,6 +267,8 @@ Public Class frmNuevoTramite
                 conexion.Close()
             End Try
         End If
+        actualizarDataGrid()
+
         If TextBox1.Text = "" Then
             Limpiarcampos()
             Button2.Enabled = True
@@ -352,7 +443,9 @@ Public Class frmNuevoTramite
     End Sub
     ''Guardar 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        ''datos del cliente
         MostrarCantidadFilas()
+        TextBox3.Text = TextBox1.Text
         conect()
         If conexion.State = ConnectionState.Closed Then
             conexion.Open()
@@ -380,6 +473,7 @@ Public Class frmNuevoTramite
             comando.ExecuteNonQuery()
             Button7.Enabled = True
 
+            ''referencias
             Dim consulta2 As String = "INSERT INTO referencias (IDCliente,	R1Nombre,	R1Parentesco,	R1Direccion,	R1Numero,	R2Nombre,	R2Parentesco,	R2Direccion,	R2Numero) VALUES (@IDCliente,	@R1Nombre,	@R1Parentesco,	@R1Direccion,	@R1Numero,	@R2Nombre,	@R2Parentesco,	@R2Direccion,	@R2Numero)"
             Dim comando2 As New SqlCommand(consulta2, conexion)
             comando2.Parameters.AddWithValue("@IDCliente", TextBox1.Text)
@@ -392,6 +486,21 @@ Public Class frmNuevoTramite
             comando2.Parameters.AddWithValue("@R2Direccion", TextBox27.Text)
             comando2.Parameters.AddWithValue("@R2Numero", TextBox24.Text)
             comando2.ExecuteNonQuery()
+
+            ''plan de pago
+            Dim consulta3 As String = "INSERT INTO PlanesDePago (IDPlanPago,	IDCliente,	Cuota,	FechaDeDesembolso,	Monto,	MontoSolicitado,	Prima,	InteresAnual,	PrimerPago,	papeleria) VALUES (@IDPlanPago,	@IDCliente,	@Cuota,	@FechaDeDesembolso,	@Monto,	@MontoSolicitado,	@Prima,	@InteresAnual,	@PrimerPago,	@papeleria)"
+            Dim comando3 As New SqlCommand(consulta3, conexion)
+            comando3.Parameters.AddWithValue("@IDPlanPago", TextBox3.Text)
+            comando3.Parameters.AddWithValue("@IDCliente", TextBox1.Text)
+            comando3.Parameters.AddWithValue("@Cuota", TextBox22.Text)
+            comando3.Parameters.AddWithValue("@FechaDeDesembolso", MaskedTextBox2.Text)
+            comando3.Parameters.AddWithValue("@Monto", TextBox18.Text)
+            comando3.Parameters.AddWithValue("@MontoSolicitado", TextBox16.Text)
+            comando3.Parameters.AddWithValue("@Prima", TextBox17.Text)
+            comando3.Parameters.AddWithValue("@InteresAnual", TextBox19.Text)
+            comando3.Parameters.AddWithValue("@PrimerPago", MaskedTextBox3.Text)
+            comando3.Parameters.AddWithValue("@papeleria", TextBox21.Text)
+            comando3.ExecuteNonQuery()
         Catch ex As Exception
         Finally
             conexion.Close()
@@ -402,6 +511,7 @@ Public Class frmNuevoTramite
     End Sub
     ''Editar
     Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
+        ''datos del cliente
         Dim terminoBusqueda As String = TextBox1.Text.Trim()
         If Not String.IsNullOrEmpty(terminoBusqueda) Then
             Dim consulta As String = "UPDATE Clientes SET IDCliente = @IDCliente, Nombre = @Nombre, Direccion = @Direccion, Departamento = @Departamento, Ciudad = @Ciudad, Telefono = @Telefono, Sexo = @Sexo, Fecha = @Fecha, Id = @Id, profecion = @profecion, ocupacion = @ocupacion, barrio = @barrio, observacion = @observacion, codigo_departamento = @codigo_departamento, codigo_municipio = @codigo_municipio, codigo_profecion = @codigo_profecion, codigo_ocupacion = @codigo_ocupacion WHERE IDCliente = @IDCliente"
@@ -430,15 +540,66 @@ Public Class frmNuevoTramite
                 Dim filasAfectadas As Integer = comando.ExecuteNonQuery()
                 If filasAfectadas > 0 Then
                 Else
-                    MessageBox.Show("No se encontró el Cliente especificado.", "No Existe", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 End If
             Catch ex As Exception
-                MessageBox.Show("Error al intentar actualizar el registro: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Finally
                 conexion.Close()
             End Try
         Else
-            MessageBox.Show("Por favor, ingrese Numero de Expediene.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        End If
+
+        ''referencias
+        If Not String.IsNullOrEmpty(terminoBusqueda) Then
+            Dim consulta2 As String = "UPDATE referencias SET IDCliente = @IDCliente, R1Nombre = @R1Nombre, R1Parentesco = @R1Parentesco, R1Direccion = @R1Direccion, R1Numero = @R1Numero, R2Nombre = @R2Nombre, R2Parentesco = @R2Parentesco, R2Direccion = @R2Direccion, R2Numero = @R2Numero WHERE IDCliente = @IDCliente"
+            Try
+                If conexion.State = ConnectionState.Closed Then
+                    conexion.Open()
+                End If
+                Dim comando2 As New SqlCommand(consulta2, conexion)
+                comando2.Parameters.AddWithValue("@R1Nombre", TextBox32.Text)
+                comando2.Parameters.AddWithValue("@R1Parentesco", TextBox30.Text)
+                comando2.Parameters.AddWithValue("@R1Direccion", TextBox29.Text)
+                comando2.Parameters.AddWithValue("@R1Numero", TextBox28.Text)
+                comando2.Parameters.AddWithValue("@R2Nombre", TextBox33.Text)
+                comando2.Parameters.AddWithValue("@R2Parentesco", TextBox31.Text)
+                comando2.Parameters.AddWithValue("@R2Direccion", TextBox27.Text)
+                comando2.Parameters.AddWithValue("@R2Numero", TextBox24.Text)
+                comando2.Parameters.AddWithValue("@IDCliente", terminoBusqueda)
+                Dim filasAfectadas As Integer = comando2.ExecuteNonQuery()
+            Catch ex As Exception
+            Finally
+                conexion.Close()
+            End Try
+        Else
+        End If
+
+        ''plan de pago
+        If Not String.IsNullOrEmpty(terminoBusqueda) Then
+            Dim consulta3 As String = "UPDATE PlanesDePago SET IDPlanPago = @IDPlanPago, Cuota = @Cuota, FechaDeDesembolso = @FechaDeDesembolso, Monto = @Monto, MontoSolicitado = @MontoSolicitado, Prima = @Prima, InteresAnual = @InteresAnual, PrimerPago = @PrimerPago, papeleria = @papeleria WHERE IDCliente = @IDCliente"
+            Try
+                If conexion.State = ConnectionState.Closed Then
+                    conexion.Open()
+                End If
+                Dim comando3 As New SqlCommand(consulta3, conexion)
+                comando3.Parameters.AddWithValue("@IDPlanPago", TextBox3.Text)
+                comando3.Parameters.AddWithValue("@Cuota", TextBox22.Text)
+                comando3.Parameters.AddWithValue("@FechaDeDesembolso", MaskedTextBox2.Text)
+                comando3.Parameters.AddWithValue("@Monto", TextBox18.Text)
+                comando3.Parameters.AddWithValue("@MontoSolicitado", TextBox16.Text)
+                comando3.Parameters.AddWithValue("@Prima", TextBox17.Text)
+                comando3.Parameters.AddWithValue("@InteresAnual", TextBox19.Text)
+                comando3.Parameters.AddWithValue("@PrimerPago", MaskedTextBox3.Text)
+                comando3.Parameters.AddWithValue("@papeleria", TextBox21.Text)
+                comando3.Parameters.AddWithValue("@IDCliente", terminoBusqueda)
+                Dim filasAfectadas As Integer = comando3.ExecuteNonQuery()
+                If filasAfectadas > 0 Then
+                Else
+                End If
+            Catch ex As Exception
+            Finally
+                conexion.Close()
+            End Try
+        Else
         End If
         DeshabilitarCampos()
         Button9.Enabled = True
@@ -460,10 +621,21 @@ Public Class frmNuevoTramite
                     If conexion.State = ConnectionState.Closed Then
                         conexion.Open()
                     End If
+                    ''plan de pago
+                    Dim consulta3 As String = "DELETE FROM PlanesDePago WHERE IDCliente = @IDCliente"
+                    Dim comando3 As New SqlCommand(consulta3, conexion)
+                    comando3.Parameters.AddWithValue("@IDCliente", terminoBusqueda)
+                    comando3.ExecuteNonQuery()
+                    ''datos del cliente
                     Dim consulta As String = "DELETE FROM Clientes WHERE IDCliente = @IDCliente"
                     Dim comando As New SqlCommand(consulta, conexion)
                     comando.Parameters.AddWithValue("@IDCliente", terminoBusqueda)
                     comando.ExecuteNonQuery()
+                    ''referencias
+                    Dim consulta2 As String = "DELETE FROM referencias WHERE IDCliente = @IDCliente"
+                    Dim comando2 As New SqlCommand(consulta2, conexion)
+                    comando2.Parameters.AddWithValue("@IDCliente", terminoBusqueda)
+                    comando2.ExecuteNonQuery()
                     MessageBox.Show("Registro eliminado exitosamente.", "Eliminado", MessageBoxButtons.OK, MessageBoxIcon.Information)
                     Limpiarcampos()
                     Button9.Enabled = False

@@ -32,5 +32,5 @@ C:\Users\W11CESAR\Desktop\SISTEMA ORLANDO\SCOC\SCOC\obj\Debug\SCOC.frmListaOcupa
 C:\Users\W11CESAR\Desktop\SISTEMA ORLANDO\SCOC\SCOC\obj\Debug\SCOC.frmListaProfeciones.resources
 C:\Users\W11CESAR\Desktop\SISTEMA ORLANDO\SCOC\SCOC\obj\Debug\SCOC.frmListaDepartamento.resources
 C:\Users\W11CESAR\Desktop\SISTEMA ORLANDO\SCOC\SCOC\obj\Debug\SCOC.frmListaCiudades.resources
-C:\Users\W11CESAR\Desktop\SISTEMA ORLANDO\SCOC\SCOC\obj\Debug\SCOC.vbprojResolveAssemblyReference.cache
 C:\Users\W11CESAR\Desktop\SISTEMA ORLANDO\SCOC\SCOC\obj\Debug\SCOC.frmImprimirDatosCliente.resources
+C:\Users\W11CESAR\Desktop\SISTEMA ORLANDO\SCOC\SCOC\obj\Debug\SCOC.vbprojResolveAssemblyReference.cache

@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class Form1
     Inherits System.Windows.Forms.Form
 
     'Form reemplaza a Dispose para limpiar la lista de componentes.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class Form1
     'NOTA: el Diseñador de Windows Forms necesita el siguiente procedimiento
     'Se puede modificar usando el Diseñador de Windows Forms.  
     'No lo modifique con el editor de código.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
@@ -72,19 +72,19 @@ Partial Class Form1
         '
         Me.NuevoTramiteToolStripMenuItem.Image = CType(resources.GetObject("NuevoTramiteToolStripMenuItem.Image"), System.Drawing.Image)
         Me.NuevoTramiteToolStripMenuItem.Name = "NuevoTramiteToolStripMenuItem"
-        Me.NuevoTramiteToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.NuevoTramiteToolStripMenuItem.Size = New System.Drawing.Size(151, 22)
         Me.NuevoTramiteToolStripMenuItem.Text = "&Nuevo Tramite"
         '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(162, 6)
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(148, 6)
         '
         'SalirToolStripMenuItem
         '
         Me.SalirToolStripMenuItem.Image = CType(resources.GetObject("SalirToolStripMenuItem.Image"), System.Drawing.Image)
         Me.SalirToolStripMenuItem.Name = "SalirToolStripMenuItem"
-        Me.SalirToolStripMenuItem.Size = New System.Drawing.Size(165, 22)
+        Me.SalirToolStripMenuItem.Size = New System.Drawing.Size(151, 22)
         Me.SalirToolStripMenuItem.Text = "&Salir"
         '
         'VerEImprimirToolStripMenuItem
@@ -98,7 +98,7 @@ Partial Class Form1
         '
         Me.VerEstadoDeLosTramitesToolStripMenuItem.Image = CType(resources.GetObject("VerEstadoDeLosTramitesToolStripMenuItem.Image"), System.Drawing.Image)
         Me.VerEstadoDeLosTramitesToolStripMenuItem.Name = "VerEstadoDeLosTramitesToolStripMenuItem"
-        Me.VerEstadoDeLosTramitesToolStripMenuItem.Size = New System.Drawing.Size(237, 22)
+        Me.VerEstadoDeLosTramitesToolStripMenuItem.Size = New System.Drawing.Size(208, 22)
         Me.VerEstadoDeLosTramitesToolStripMenuItem.Text = "&Ver estado de los tramites"
         '
         'VerListaDeExpedientesToolStripMenuItem
@@ -124,7 +124,7 @@ Partial Class Form1
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(237, 6)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(185, 6)
         '
         'SeleccionartodoToolStripMenuItem
         '

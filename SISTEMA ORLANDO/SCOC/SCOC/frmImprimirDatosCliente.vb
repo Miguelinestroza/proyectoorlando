@@ -44,6 +44,15 @@ Public Class frmImprimirDatosCliente
             Label59.Text = Val(Label58.Text) * 1
             Label64.Text = "Mensual"
         End If
+        Label34.Text = frmNuevoTramite.TextBox32.Text
+        Label37.Text = frmNuevoTramite.TextBox30.Text
+
+        Label43.Text = frmNuevoTramite.TextBox29.Text
+        Label40.Text = frmNuevoTramite.TextBox28.Text
+        Label55.Text = frmNuevoTramite.TextBox33.Text
+        Label52.Text = frmNuevoTramite.TextBox31.Text
+        Label49.Text = frmNuevoTramite.TextBox27.Text
+        Label46.Text = frmNuevoTramite.TextBox24.Text
     End Sub
     Private Sub OcultarBotones(sender As Object, e As PrintEventArgs)
         Button1.Visible = False

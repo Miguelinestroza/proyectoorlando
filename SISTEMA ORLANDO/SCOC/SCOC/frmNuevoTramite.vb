@@ -169,7 +169,7 @@ Public Class frmNuevoTramite
         Catch ex As Exception
         End Try
     End Sub
-    ''Busacar Datos del Cliente
+    ''Busacar
     Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
         Button2.Enabled = False
         Dim cargarsexo As String
@@ -595,6 +595,41 @@ Public Class frmNuevoTramite
                 If filasAfectadas > 0 Then
                 Else
                 End If
+            Catch ex As Exception
+            Finally
+                conexion.Close()
+            End Try
+        Else
+        End If
+
+        If Not String.IsNullOrEmpty(terminoBusqueda) Then
+            Try
+                If conexion.State = ConnectionState.Closed Then
+                    conexion.Open()
+                End If
+                For Each row As DataGridViewRow In DataGridView1.Rows
+                    Dim numeroCuota As Integer = Convert.ToInt32(row.Cells("No.").Value)
+                    Dim fechaPago As Date = Convert.ToDateTime(row.Cells("Fecha").Value)
+                    Dim capitalAbonado As Decimal = Convert.ToDecimal(row.Cells("Capital").Value)
+                    Dim interesPagado As Decimal = Convert.ToDecimal(row.Cells("Interes").Value)
+                    Dim cuota As Decimal = Convert.ToDecimal(row.Cells("Cuota").Value)
+                    Dim saldo As Decimal = Convert.ToDecimal(row.Cells("Saldo").Value)
+                    Dim Dias As Decimal = Convert.ToDecimal(row.Cells("Dias").Value)
+                    Dim pagado As Boolean = False
+
+                    Dim query As String = "UPDATE EstadosDeCuenta SET Fecha_Pago = @Fecha_Pago, Capital_Abonado = @Capital_Abonado, Interes_Pagado = @Interes_Pagado, Cuota = @Cuota, Saldo = @Saldo, Dias = @Dias, Pagado = @Pagado WHERE IDCliente = @IDCliente AND Numero_Cuota = @Numero_Cuota"
+                    Dim command As New SqlCommand(query, conexion)
+                    command.Parameters.AddWithValue("@Fecha_Pago", fechaPago)
+                    command.Parameters.AddWithValue("@Capital_Abonado", capitalAbonado)
+                    command.Parameters.AddWithValue("@Interes_Pagado", interesPagado)
+                    command.Parameters.AddWithValue("@Cuota", cuota)
+                    command.Parameters.AddWithValue("@Saldo", saldo)
+                    command.Parameters.AddWithValue("@Dias", Dias)
+                    command.Parameters.AddWithValue("@Pagado", pagado)
+                    command.Parameters.AddWithValue("@IDCliente", terminoBusqueda)
+                    command.Parameters.AddWithValue("@Numero_Cuota", numeroCuota)
+                    command.ExecuteNonQuery()
+                Next
             Catch ex As Exception
             Finally
                 conexion.Close()

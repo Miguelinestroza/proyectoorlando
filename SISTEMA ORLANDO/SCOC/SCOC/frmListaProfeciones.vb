@@ -17,6 +17,9 @@ Public Class frmListaProfeciones
         Dim consulta As String = $"select * from {tabla}"
         Try
             conect()
+            If conexion.State = ConnectionState.Closed Then
+                conexion.Open()
+            End If
             Using comando As New SqlCommand(consulta, conexion)
                 Using adaptador As New SqlDataAdapter(comando)
                     Dim dataSet As New DataSet()

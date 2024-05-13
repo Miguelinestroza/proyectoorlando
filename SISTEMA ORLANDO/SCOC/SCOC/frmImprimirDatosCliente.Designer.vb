@@ -89,6 +89,7 @@ Partial Class frmImprimirDatosCliente
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.Label4 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.Panel4.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -98,6 +99,7 @@ Partial Class frmImprimirDatosCliente
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.White
+        Me.Panel1.Controls.Add(Me.Label4)
         Me.Panel1.Controls.Add(Me.Panel4)
         Me.Panel1.Controls.Add(Me.Panel3)
         Me.Panel1.Controls.Add(Me.Label6)
@@ -843,6 +845,18 @@ Partial Class frmImprimirDatosCliente
         Me.Button1.TabIndex = 2
         Me.Button1.UseVisualStyleBackColor = True
         '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Cambria", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(602, 969)
+        Me.Label4.Name = "Label4"
+        Me.Label4.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.Label4.Size = New System.Drawing.Size(167, 12)
+        Me.Label4.TabIndex = 56
+        Me.Label4.Text = "Copyright© 2024 Miguel Inestroza"
+        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'frmImprimirDatosCliente
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -931,4 +945,5 @@ Partial Class frmImprimirDatosCliente
     Friend WithEvents Label71 As Label
     Friend WithEvents Label83 As Label
     Friend WithEvents Label84 As Label
+    Friend WithEvents Label4 As Label
 End Class

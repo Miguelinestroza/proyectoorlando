@@ -21,4 +21,31 @@
         frmAgregarOcupaciones.MdiParent = Me
         frmAgregarOcupaciones.Show()
     End Sub
+
+    Private Sub PostearPagoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PostearPagoToolStripMenuItem.Click
+        frmPostearPago.MdiParent = Me
+        frmPostearPago.Show()
+    End Sub
+
+    Private Sub VerEstadoDeLosTramitesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles VerEstadoDeLosTramitesToolStripMenuItem.Click
+        frmEstadoDeCuenta.MdiParent = Me
+        frmEstadoDeCuenta.Show()
+    End Sub
+
+    Private Sub VerMoraToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles VerMoraToolStripMenuItem.Click
+        frmMora.MdiParent = Me
+        frmMora.Show()
+    End Sub
+
+    Private Sub CerrarSesionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CerrarSesionToolStripMenuItem.Click
+        lbTipo.Text = ""
+        lbUsuario.Text = ""
+        Dim loginForm As New frmSesion()
+        loginForm.Show()
+        MenuStrip1.Visible = False
+        ArchivoToolStripMenuItem.Enabled = False
+        EditarToolStripMenuItem.Enabled = False
+        HerramientasToolStripMenuItem.Enabled = False
+        StatusStrip1.Visible = False
+    End Sub
 End Class

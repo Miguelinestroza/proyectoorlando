@@ -47,6 +47,8 @@ Partial Class Form1
         Me.lbUsuario = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusLabel2 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.lbTipo = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.PostearPagoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.VerMoraToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -63,7 +65,7 @@ Partial Class Form1
         '
         'ArchivoToolStripMenuItem
         '
-        Me.ArchivoToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NuevoTramiteToolStripMenuItem, Me.ToolStripSeparator2, Me.SalirToolStripMenuItem})
+        Me.ArchivoToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NuevoTramiteToolStripMenuItem, Me.PostearPagoToolStripMenuItem, Me.ToolStripSeparator2, Me.SalirToolStripMenuItem})
         Me.ArchivoToolStripMenuItem.Name = "ArchivoToolStripMenuItem"
         Me.ArchivoToolStripMenuItem.Size = New System.Drawing.Size(60, 20)
         Me.ArchivoToolStripMenuItem.Text = "&Archivo"
@@ -72,24 +74,24 @@ Partial Class Form1
         '
         Me.NuevoTramiteToolStripMenuItem.Image = CType(resources.GetObject("NuevoTramiteToolStripMenuItem.Image"), System.Drawing.Image)
         Me.NuevoTramiteToolStripMenuItem.Name = "NuevoTramiteToolStripMenuItem"
-        Me.NuevoTramiteToolStripMenuItem.Size = New System.Drawing.Size(151, 22)
+        Me.NuevoTramiteToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.NuevoTramiteToolStripMenuItem.Text = "&Nuevo Tramite"
         '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(148, 6)
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(149, 6)
         '
         'SalirToolStripMenuItem
         '
         Me.SalirToolStripMenuItem.Image = CType(resources.GetObject("SalirToolStripMenuItem.Image"), System.Drawing.Image)
         Me.SalirToolStripMenuItem.Name = "SalirToolStripMenuItem"
-        Me.SalirToolStripMenuItem.Size = New System.Drawing.Size(151, 22)
+        Me.SalirToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.SalirToolStripMenuItem.Text = "&Salir"
         '
         'VerEImprimirToolStripMenuItem
         '
-        Me.VerEImprimirToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.VerEstadoDeLosTramitesToolStripMenuItem, Me.VerListaDeExpedientesToolStripMenuItem})
+        Me.VerEImprimirToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.VerEstadoDeLosTramitesToolStripMenuItem, Me.VerListaDeExpedientesToolStripMenuItem, Me.VerMoraToolStripMenuItem})
         Me.VerEImprimirToolStripMenuItem.Name = "VerEImprimirToolStripMenuItem"
         Me.VerEImprimirToolStripMenuItem.Size = New System.Drawing.Size(86, 20)
         Me.VerEImprimirToolStripMenuItem.Text = "&Ver/Imprimir"
@@ -98,14 +100,14 @@ Partial Class Form1
         '
         Me.VerEstadoDeLosTramitesToolStripMenuItem.Image = CType(resources.GetObject("VerEstadoDeLosTramitesToolStripMenuItem.Image"), System.Drawing.Image)
         Me.VerEstadoDeLosTramitesToolStripMenuItem.Name = "VerEstadoDeLosTramitesToolStripMenuItem"
-        Me.VerEstadoDeLosTramitesToolStripMenuItem.Size = New System.Drawing.Size(208, 22)
-        Me.VerEstadoDeLosTramitesToolStripMenuItem.Text = "&Ver estado de los tramites"
+        Me.VerEstadoDeLosTramitesToolStripMenuItem.Size = New System.Drawing.Size(188, 22)
+        Me.VerEstadoDeLosTramitesToolStripMenuItem.Text = "&Ver estados de cuenta"
         '
         'VerListaDeExpedientesToolStripMenuItem
         '
         Me.VerListaDeExpedientesToolStripMenuItem.Image = CType(resources.GetObject("VerListaDeExpedientesToolStripMenuItem.Image"), System.Drawing.Image)
         Me.VerListaDeExpedientesToolStripMenuItem.Name = "VerListaDeExpedientesToolStripMenuItem"
-        Me.VerListaDeExpedientesToolStripMenuItem.Size = New System.Drawing.Size(208, 22)
+        Me.VerListaDeExpedientesToolStripMenuItem.Size = New System.Drawing.Size(188, 22)
         Me.VerListaDeExpedientesToolStripMenuItem.Text = "&Ver Lista De Clientes"
         '
         'EditarToolStripMenuItem
@@ -143,7 +145,7 @@ Partial Class Form1
         '
         Me.PersonalizarToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AgregarUsuariosToolStripMenuItem, Me.EditarUsuariosToolStripMenuItem, Me.EliminarUsuariosToolStripMenuItem, Me.ListaDeUsuariosToolStripMenuItem})
         Me.PersonalizarToolStripMenuItem.Name = "PersonalizarToolStripMenuItem"
-        Me.PersonalizarToolStripMenuItem.Size = New System.Drawing.Size(137, 22)
+        Me.PersonalizarToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.PersonalizarToolStripMenuItem.Text = "&Personalizar"
         '
         'AgregarUsuariosToolStripMenuItem
@@ -212,6 +214,18 @@ Partial Class Form1
         Me.lbTipo.Size = New System.Drawing.Size(13, 17)
         Me.lbTipo.Text = "0"
         '
+        'PostearPagoToolStripMenuItem
+        '
+        Me.PostearPagoToolStripMenuItem.Name = "PostearPagoToolStripMenuItem"
+        Me.PostearPagoToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.PostearPagoToolStripMenuItem.Text = "&Postear Pago"
+        '
+        'VerMoraToolStripMenuItem
+        '
+        Me.VerMoraToolStripMenuItem.Name = "VerMoraToolStripMenuItem"
+        Me.VerMoraToolStripMenuItem.Size = New System.Drawing.Size(188, 22)
+        Me.VerMoraToolStripMenuItem.Text = "&Ver mora"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -260,4 +274,6 @@ Partial Class Form1
     Friend WithEvents lbUsuario As ToolStripStatusLabel
     Friend WithEvents ToolStripStatusLabel2 As ToolStripStatusLabel
     Friend WithEvents lbTipo As ToolStripStatusLabel
+    Friend WithEvents PostearPagoToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents VerMoraToolStripMenuItem As ToolStripMenuItem
 End Class

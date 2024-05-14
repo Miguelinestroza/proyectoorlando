@@ -14,7 +14,7 @@ Public Class frmListaCiudades
     End Sub
     Private Sub CargarDatos(tabla As String, dataGridView As DataGridView)
         dataGridView.DataSource = Nothing
-        Dim consulta As String = $"select * from {tabla}"
+        Dim consulta As String = $"select Codigo, Nombre from {tabla}"
         Try
             conect()
             If conexion.State = ConnectionState.Closed Then

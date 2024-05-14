@@ -407,7 +407,7 @@ Public Class frmNuevoTramite
                 conexion.Open()
             End If
             Try
-                Dim terminoBusqueda As String = TextBox9.Text.Trim() & TextBox11.Text.Trim()
+                Dim terminoBusqueda As String = TextBox11.Text.Trim()
                 Dim consulta As String = "SELECT * FROM Ciudades WHERE Codigo = @Codigo"
                 Using comando As New SqlCommand(consulta, conexion)
                     comando.Parameters.AddWithValue("@Codigo", terminoBusqueda)
@@ -601,41 +601,6 @@ Public Class frmNuevoTramite
             End Try
         Else
         End If
-
-        If Not String.IsNullOrEmpty(terminoBusqueda) Then
-            Try
-                If conexion.State = ConnectionState.Closed Then
-                    conexion.Open()
-                End If
-                For Each row As DataGridViewRow In DataGridView1.Rows
-                    Dim numeroCuota As Integer = Convert.ToInt32(row.Cells("No.").Value)
-                    Dim fechaPago As Date = Convert.ToDateTime(row.Cells("Fecha").Value)
-                    Dim capitalAbonado As Decimal = Convert.ToDecimal(row.Cells("Capital").Value)
-                    Dim interesPagado As Decimal = Convert.ToDecimal(row.Cells("Interes").Value)
-                    Dim cuota As Decimal = Convert.ToDecimal(row.Cells("Cuota").Value)
-                    Dim saldo As Decimal = Convert.ToDecimal(row.Cells("Saldo").Value)
-                    Dim Dias As Decimal = Convert.ToDecimal(row.Cells("Dias").Value)
-                    Dim pagado As Boolean = False
-
-                    Dim query As String = "UPDATE EstadosDeCuenta SET Fecha_Pago = @Fecha_Pago, Capital_Abonado = @Capital_Abonado, Interes_Pagado = @Interes_Pagado, Cuota = @Cuota, Saldo = @Saldo, Dias = @Dias, Pagado = @Pagado WHERE IDCliente = @IDCliente AND Numero_Cuota = @Numero_Cuota"
-                    Dim command As New SqlCommand(query, conexion)
-                    command.Parameters.AddWithValue("@Fecha_Pago", fechaPago)
-                    command.Parameters.AddWithValue("@Capital_Abonado", capitalAbonado)
-                    command.Parameters.AddWithValue("@Interes_Pagado", interesPagado)
-                    command.Parameters.AddWithValue("@Cuota", cuota)
-                    command.Parameters.AddWithValue("@Saldo", saldo)
-                    command.Parameters.AddWithValue("@Dias", Dias)
-                    command.Parameters.AddWithValue("@Pagado", pagado)
-                    command.Parameters.AddWithValue("@IDCliente", terminoBusqueda)
-                    command.Parameters.AddWithValue("@Numero_Cuota", numeroCuota)
-                    command.ExecuteNonQuery()
-                Next
-            Catch ex As Exception
-            Finally
-                conexion.Close()
-            End Try
-        Else
-        End If
         DeshabilitarCampos()
         Button9.Enabled = True
         Button8.Enabled = True
@@ -671,6 +636,11 @@ Public Class frmNuevoTramite
                     Dim comando2 As New SqlCommand(consulta2, conexion)
                     comando2.Parameters.AddWithValue("@IDCliente", terminoBusqueda)
                     comando2.ExecuteNonQuery()
+                    ''estados de cuenta
+                    Dim consulta4 As String = "DELETE FROM EstadosDeCuenta WHERE IDCliente = @IDCliente"
+                    Dim comando4 As New SqlCommand(consulta4, conexion)
+                    comando4.Parameters.AddWithValue("@IDCliente", terminoBusqueda)
+                    comando4.ExecuteNonQuery()
                     MessageBox.Show("Registro eliminado exitosamente.", "Eliminado", MessageBoxButtons.OK, MessageBoxIcon.Information)
                     Limpiarcampos()
                     Button9.Enabled = False
@@ -810,6 +780,38 @@ Public Class frmNuevoTramite
 
     Private Sub RadioButton3_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton3.CheckedChanged
         actualizarDataGrid()
+    End Sub
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Dim terminoBusqueda As String = TextBox1.Text.Trim()
+        If Not String.IsNullOrEmpty(terminoBusqueda) Then
+            If conexion.State = ConnectionState.Closed Then
+                conexion.Open()
+            End If
+            For Each row As DataGridViewRow In DataGridView1.Rows
+                Dim numeroCuota As Integer = Convert.ToInt32(row.Cells("Column1").Value)
+                Dim fechaPago As Date = Convert.ToDateTime(row.Cells("Column2").Value)
+                Dim capitalAbonado As Decimal = Convert.ToDecimal(row.Cells("Column3").Value)
+                Dim interesPagado As Decimal = Convert.ToDecimal(row.Cells("Column5").Value)
+                Dim cuota As Decimal = Convert.ToDecimal(row.Cells("Column6").Value)
+                Dim saldo As Decimal = Convert.ToDecimal(row.Cells("Column7").Value)
+                Dim Dias As Decimal = Convert.ToDecimal(row.Cells("Column8").Value)
+                Dim pagado As Boolean = False
+                Dim query As String = "INSERT INTO EstadosDeCuenta (IDCliente, Numero_Cuota, Fecha_Pago, Capital_Abonado, Interes_Pagado, Cuota, Saldo, Dias, Pagado) VALUES (@IDCliente, @Numero_Cuota, @Fecha_Pago, @Capital_Abonado, @Interes_Pagado, @Cuota, @Saldo, @Dias, @Pagado)"
+                Dim command As New SqlCommand(query, conexion)
+                command.Parameters.AddWithValue("@Fecha_Pago", fechaPago)
+                command.Parameters.AddWithValue("@Capital_Abonado", capitalAbonado)
+                command.Parameters.AddWithValue("@Interes_Pagado", interesPagado)
+                command.Parameters.AddWithValue("@Cuota", cuota)
+                command.Parameters.AddWithValue("@Saldo", saldo)
+                command.Parameters.AddWithValue("@Dias", Dias)
+                command.Parameters.AddWithValue("@Pagado", pagado)
+                command.Parameters.AddWithValue("@IDCliente", terminoBusqueda)
+                command.Parameters.AddWithValue("@Numero_Cuota", numeroCuota)
+                command.ExecuteNonQuery()
+            Next
+            conexion.Close()
+        Else
+        End If
     End Sub
     Private Sub Button5_Click(sender As Object, e As EventArgs)
         Me.Close()
